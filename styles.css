@@ -3,15 +3,13 @@ body {
     background: linear-gradient(135deg, #F5F5DC, #E6D7B9);
     background-attachment: fixed;
     margin: 0;
-    /* التعديل: استخدام fit-content بدلاً من auto */
-    min-height: fit-content; /* تم التعديل */
+    min-height: fit-content;
     width: 100vw;
     position: relative;
     display: flex;
     flex-direction: column;
-    /* التعديل: السماح بالتمرير العمودي إذا تجاوز المحتوى الشاشة */
-    overflow-y: auto; /* تم التعديل */
-    overflow-x: hidden; /* تم الإبقاء على منع التمرير الأفقي */
+    overflow-y: auto;
+    overflow-x: hidden;
     box-sizing: border-box;
     transition: all 0.3s ease;
 }
@@ -52,9 +50,7 @@ body {
     flex-direction: column;
     align-items: center;
     transition: height 0.3s ease;
-    /* التعديل: استخدام fit-content بدلاً من auto */
-    min-height: fit-content; /* تم التعديل */
-    /* التأكد من عدم وجود padding-bottom أو margin-bottom كبير */
+    min-height: fit-content;
     padding-bottom: 0;
     margin-bottom: 0;
 }
@@ -74,15 +70,14 @@ body {
     gap: 10px;
 }
 
-/* تعديل تنسيقات حاوية الإعلانات */
 #announcements-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 10px;
-    margin: 10px auto; /* تم التعديل */
+    margin: 10px auto;
     width: 90%;
-    max-width: 300px; /* تم التعديل */
+    max-width: 300px;
 }
 
 #access-code {
@@ -116,8 +111,7 @@ body {
 
 #game-container {
     overflow-y: hidden;
-    /* التعديل: استخدام fit-content بدلاً من auto */
-    min-height: fit-content; /* تم التعديل */
+    min-height: fit-content;
 }
 
 .header-section {
@@ -147,8 +141,7 @@ h1 {
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    /* التعديل: استخدام fit-content بدلاً من auto */
-    max-height: fit-content; /* تم التعديل من calc(100vh - 60px) */
+    max-height: fit-content;
     overflow: hidden;
     transition: flex-direction 0.3s ease;
 }
@@ -211,8 +204,7 @@ h1 {
     border: none;
     background: transparent;
     margin: 3px 0;
-    /* التعديل: استخدام fit-content بدلاً من auto */
-    max-height: fit-content; /* تم التعديل من 50vh */
+    max-height: fit-content;
 }
 
 #game-image {
@@ -241,21 +233,20 @@ h1 {
     z-index: 10;
 }
 
-/* تعديل تنسيقات زر "إظهار الحل" */
 #hint-button {
     background: #6B7280;
     color: #FFFFFF;
-    padding: 6px 12px; /* تم التعديل */
+    padding: 6px 12px;
     border: none;
     border-radius: 10px;
     cursor: pointer;
-    font-size: 0.8rem; /* تم التعديل */
-    margin: 5px auto; /* لتوسيط الزر */
+    font-size: 0.8rem;
+    margin: 5px auto;
     transition: background 0.3s ease, transform 0.3s ease;
-    max-width: 140px; /* تم التعديل */
-    width: 100%; /* تم الإضافة */
-    text-align: center; /* لضمان توسيط النص */
-    box-sizing: border-box; /* لضمان التوافق مع العرض */
+    max-width: 140px;
+    width: 100%;
+    text-align: center;
+    box-sizing: border-box;
 }
 
 #hint-button:hover {
@@ -301,16 +292,14 @@ h1 {
     width: 90%;
     max-width: 450px;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-    /* التعديل: تقليل margin-bottom لعدم ترك فراغ كبير */
-    margin: 3px auto 0; /* تم التعديل */
+    margin: 3px auto 0;
     box-sizing: border-box;
     overflow: hidden;
     display: flex;
     flex-direction: column;
     gap: 10px;
-    /* التعديل: استخدام fit-content */
-    height: fit-content; /* تم الإضافة */
-    min-height: fit-content; /* لضمان عدم وجود ارتفاع أدنى ثابت */
+    height: fit-content;
+    min-height: fit-content;
 }
 
 .bottom-container .timer-container {
@@ -382,8 +371,7 @@ h1 {
 }
 
 footer {
-    /* التعديل: تغيير position: fixed إلى relative */
-    position: relative; /* تم التعديل */
+    position: relative;
     bottom: 0;
     left: 0;
     width: 100%;
@@ -393,8 +381,7 @@ footer {
     font-size: 0.8rem;
     padding: 10px 0;
     z-index: 200;
-    /* التعديل: السماح للـ footer بأن يدفع إلى الأسفل في تخطيط flexbox */
-    margin-top: auto; /* تم الإضافة */
+    margin-top: auto;
 }
 
 .announcement-card {
@@ -454,12 +441,10 @@ footer {
     .team p {
         font-size: 1.1rem;
     }
-    /* تنسيقات زر "إظهار الحل" في الشاشات الصغيرة */
     #hint-button, .score-button, .next-round, .return-button {
         padding: 5px 10px;
         font-size: 0.8rem;
     }
-    /* تنسيقات حاوية الإعلانات في الشاشات الصغيرة */
     #announcements-container {
         max-width: 300px;
         margin: 10px auto;
@@ -471,8 +456,7 @@ footer {
     footer {
         font-size: 0.7rem;
         padding: 8px 0;
-        /* التأكد من عدم وجود margin-bottom كبير هنا */
-        margin-bottom: 0; /* تم التعديل */
+        margin-bottom: 0;
     }
     .bottom-container .timer-container {
         padding: 2px;
@@ -488,11 +472,10 @@ footer {
         font-size: 0.9rem;
         padding: 6px;
     }
-    /* التأكد من ضبط الـ bottom-container هنا أيضاً */
     .bottom-container {
-        margin-bottom: 0; /* تم التعديل */
-        padding-bottom: 5px; /* يمكن تعديله حسب الحاجة */
-        min-height: fit-content; /* تم التعديل */
+        margin-bottom: 0;
+        padding-bottom: 5px;
+        min-height: fit-content;
     }
 }
 
@@ -500,7 +483,7 @@ footer {
     body {
         display: flex;
         flex-direction: column;
-        min-height: 100vh; /* يمكن الإبقاء عليها هنا إذا أردت الصفحة تملأ الشاشة في هذه الوضعية */
+        min-height: 100vh;
         margin: 0;
     }
     #start-container {
@@ -511,8 +494,9 @@ footer {
     }
     #game-container {
         width: 100vw;
-        /* التعديل: استخدام fit-content بدلاً من auto */
-        min-height: fit-content; /* تم التعديل */
+        /* التعديل: للسماح للحاوية بالنمو لملء المساحة العمودية */
+        flex-grow: 1; /* تم التعديل */
+        min-height: fit-content; /* يمكن الإبقاء عليها أو إزالتها والاعتماد على flex-grow */
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
@@ -536,9 +520,9 @@ footer {
     }
     .main-content {
         width: 100%;
-        /* التعديل: استخدام fit-content بدلاً من auto */
-        height: fit-content; /* تم التعديل من calc(100vh - 80px) */
-        flex-grow: 1; /* تأكد من وجوده ليمتد على المساحة المتاحة */
+        /* التعديل: لجعلها تأخذ الارتفاع الكامل المتاح داخل game-container */
+        height: 100%; /* تم التعديل */
+        flex-grow: 1;
         display: flex;
         flex-direction: row;
         justify-content: stretch;
@@ -554,8 +538,8 @@ footer {
         justify-content: flex-start;
         padding: 0;
         margin: 0;
-        /* التعديل: استخدام fit-content بدلاً من auto */
-        height: fit-content; /* تم التعديل من 100% */
+        /* التعديل: لجعلها تأخذ الارتفاع الكامل المتاح داخل main-content */
+        height: 100%; /* تم التعديل */
         box-sizing: border-box;
         overflow: hidden;
     }
@@ -567,9 +551,9 @@ footer {
     .image-container {
         width: calc(100% - 5px);
         margin-right: 5px;
-        /* التعديل: استخدام fit-content بدلاً من auto */
-        height: fit-content; /* تم التعديل من calc(100% - 60px) */
-        max-height: fit-content; /* تم التعديل من calc(100% - 60px) */
+        /* التعديل: لجعلها تأخذ الارتفاع الكامل المتاح داخل image-section */
+        height: 100%; /* تم التعديل من fit-content */
+        max-height: 100%; /* تم التعديل من fit-content */
         aspect-ratio: 16 / 9;
         margin: 0;
         padding: 0;
@@ -582,18 +566,14 @@ footer {
         justify-content: flex-start;
         padding: 0;
         margin: 0;
-        /* التعديل: استخدام fit-content بدلاً من auto */
-        height: fit-content; /* تم التعديل من 100% */
+        /* التعديل: لجعلها تأخذ الارتفاع الكامل المتاح داخل main-content */
+        height: 100%; /* تم التعديل */
         box-sizing: border-box;
         overflow: hidden;
     }
     .bottom-container {
         width: calc(100% - 10px);
         max-width: 200px;
-        /* التعديل: استخدام fit-content */
-        min-height: fit-content; /* تم التعديل من calc(100% - 60px) */
-        max-height: fit-content; /* تم التعديل من calc(100% - 60px) */
-        height: fit-content; /* ليتكيف مع المحتوى */
         padding: 5px;
         margin: 0;
         margin-left: 10px;
@@ -604,7 +584,12 @@ footer {
         box-sizing: border-box;
         border-radius: 10px;
         box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-        overflow-y: auto;
+        /* التعديل: للسماح لها بالنمو لملء المساحة المتاحة وتفعيل التمرير */
+        flex-grow: 1; /* تم التعديل: ستأخذ المساحة المتبقية */
+        overflow-y: auto; /* تم الإبقاء عليه لتفعيل التمرير */
+        min-height: unset; /* تم التعديل: إزالة الارتفاع الأدنى الثابت */
+        max-height: unset; /* تم التعديل: إزالة الارتفاع الأقصى الثابت */
+        height: unset; /* تم التعديل: إزالة الارتفاع الثابت */
         -webkit-overflow-scrolling: touch;
     }
     .bottom-container .timer-container {
