@@ -1,7 +1,7 @@
 body {
     font-family: 'Tajawal', sans-serif;
-    /* ذوق جديد للألوان: تدرج دافئ ومريح */
-    background: linear-gradient(135deg, #FFDAB9, #FFA07A); /* PeachPuff to LightSalmon */
+    /* ذوق جديد للألوان: تدرج بيج هادئ */
+    background: linear-gradient(135deg, #F5F5DC, #E6D7B9); /* Linen to Wheat */
     margin: 0;
     min-height: 100vh;
     width: 100vw;
@@ -49,11 +49,11 @@ body {
     flex-direction: column;
     align-items: center;
     transition: height 0.3s ease;
+    justify-content: center; /* للمساعدة في توسيط المحتوى داخليًا */
 }
 
 #access-code-container {
-    justify-content: center;
-    color: #4A3C30; /* لون نص جديد */
+    color: #5A4A3C; /* لون نص جديد (بني داكن) */
     text-align: center;
     z-index: 100;
 }
@@ -71,7 +71,7 @@ body {
 #categories-container {
     justify-content: flex-start;
     overflow: hidden;
-    color: #4A3C30; /* لون نص جديد */
+    color: #5A4A3C; /* لون نص جديد */
     text-align: center;
     align-items: center;
 }
@@ -82,7 +82,7 @@ body {
     left: 0;
     width: 100%;
     max-width: 100%;
-    background: rgba(255, 248, 220, 0.5); /* خلفية شفافة فاتحة */
+    background: rgba(245, 245, 220, 0.7); /* خلفية شفافة فاتحة (Linen) */
     backdrop-filter: blur(5px);
     z-index: 200;
     display: flex;
@@ -106,56 +106,62 @@ body {
     max-width: 90%;
     border-radius: 5px;
     z-index: 110;
+    margin-bottom: 20px; /* مسافة تحت حقل الإدخال */
 }
 
-/* زر البداية: كبير ووسط الشاشة */
+/* زر البداية: كبير ووسط الشاشة عموديًا */
 #access-code-container button, #random-start, #start-game {
     padding: 15px 30px; /* حجم أكبر */
     font-size: 1.5rem; /* خط أكبر */
-    background: #8B4513; /* SaddleBrown */
+    background: #B8860B; /* DarkGoldenrod */
     color: white;
     border: none;
     border-radius: 8px;
     cursor: pointer;
-    margin: 10px;
+    margin: 10px 0; /* هوامش رأسية للتباعد */
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
     transition: transform 0.3s ease, background 0.3s ease;
     z-index: 120;
     pointer-events: auto;
     width: auto;
-    max-width: 280px; /* التحكم في العرض الأقصى */
+    max-width: 280px;
+}
+/* لتوسيط زر البداية عمودياً داخل access-code-container */
+#access-code-container button:first-of-type, #random-start:first-of-type, #start-game:first-of-type {
+    margin-top: auto;
 }
 
 #random-start {
-    background: #A0522D; /* Sienna - لون مختلف قليلاً لزر البداية العشوائية */
+    background: #CD853F; /* Peru - لون مختلف قليلاً لزر البداية العشوائية */
 }
 
 #access-code-container button:hover, #random-start:hover, #start-game:hover {
     transform: scale(1.05);
-    background: #A0522D; /* Sienna */
+    background: #CD853F; /* Peru */
 }
 
 /* زر "حفظ كتطبيق" (Install button): أصغر و أسفل زر البداية */
 .install-prompt {
     padding: 10px 20px; /* أصغر من زر البداية */
     font-size: 0.9rem; /* خط أصغر */
-    background: #CD853F; /* Peru - لون مختلف */
-    color: white;
+    background: #D2B48C; /* Tan - لون مختلف */
+    color: #5A4A3C; /* لون نص جديد */
     border: none;
     border-radius: 8px;
     cursor: pointer;
-    margin: 10px;
+    margin: 10px 0; /* هوامش رأسية للتباعد */
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
     transition: transform 0.3s ease, background 0.3s ease;
     z-index: 120;
     pointer-events: auto;
     width: auto;
-    max-width: 180px; /* أصغر من زر البداية */
+    max-width: 180px;
+    margin-bottom: auto; /* لتوسيط زر الحفظ مع زر البداية */
 }
 
 .install-prompt:hover {
     transform: scale(1.05);
-    background: #D2691E; /* Chocolate */
+    background: #BC8F8F; /* RosyBrown */
 }
 
 #categories-grid {
@@ -178,7 +184,7 @@ body {
 }
 
 .category-card {
-    background: #FFFACD; /* LemonChiffon */
+    background: #FFF8DC; /* Cornsilk */
     border-radius: 8px;
     padding: 6px;
     box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
@@ -203,7 +209,7 @@ body {
 .category-card p {
     margin: 6px 0 0;
     font-size: 0.85rem;
-    color: #4A3C30; /* لون نص جديد */
+    color: #5A4A3C; /* لون نص جديد */
 }
 
 #game-container {
@@ -217,7 +223,7 @@ body {
 }
 
 h1 {
-    color: #4A3C30; /* لون نص جديد */
+    color: #5A4A3C; /* لون نص جديد */
     font-size: 1.5rem;
     margin: 3px 0;
     font-weight: 700;
@@ -225,7 +231,7 @@ h1 {
 }
 
 .instructions {
-    color: #4A3C30; /* لون نص جديد */
+    color: #5A4A3C; /* لون نص جديد */
     font-size: 0.9rem;
     margin: 3px 0;
     line-height: 1.2;
@@ -253,7 +259,7 @@ h1 {
 
 #timer {
     font-size: 1.6rem;
-    color: #8B4513; /* لون جديد */
+    color: #B8860B; /* لون جديد */
     font-weight: bold;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 }
@@ -261,7 +267,7 @@ h1 {
 #time-input {
     padding: 5px;
     font-size: 0.8rem;
-    border: 2px solid #8B4513; /* لون جديد */
+    border: 2px solid #B8860B; /* لون جديد */
     border-radius: 5px;
     width: 50px;
 }
@@ -269,7 +275,7 @@ h1 {
 #start-timer-button {
     padding: 8px 16px;
     font-size: 0.9rem;
-    background: #3CB371; /* MediumSeaGreen */
+    background: #8FBC8F; /* DarkSeaGreen */
     color: white;
     border: none;
     border-radius: 8px;
@@ -280,7 +286,7 @@ h1 {
 
 #start-timer-button:hover {
     transform: scale(1.05);
-    background: #2E8B57; /* SeaGreen */
+    background: #6B8E23; /* OliveDrab */
 }
 
 .image-section {
@@ -315,7 +321,7 @@ h1 {
     position: absolute;
     top: 5px;
     right: 10px;
-    background: rgba(74, 60, 48, 0.8); /* لون جديد */
+    background: rgba(90, 74, 60, 0.8); /* لون جديد */
     color: white;
     padding: 3px 8px;
     font-size: 20px;
@@ -329,12 +335,12 @@ h1 {
     top: 15%; /* تم التعديل: في الجزء العلوي */
     left: 50%;
     transform: translate(-50%, -50%);
-    background: rgba(74, 60, 48, 0.7); /* لون خلفية جديد */
+    background: rgba(90, 74, 60, 0.7); /* لون خلفية جديد */
     color: white; /* لون نص جديد */
     padding: 15px; /* حجم أكبر */
     font-size: 2rem; /* تم التعديل: خط أكبر */
     font-weight: bold;
-    border: 2px solid #FFD700; /* Gold border */
+    border: 2px solid #D2B48C; /* Tan border */
     border-radius: 8px;
     text-align: center;
     z-index: 10;
@@ -342,8 +348,8 @@ h1 {
 
 /* زر إظهار الحل: في المنتصف (أفقيًا) */
 #hint-button {
-    background: #FFD700; /* Gold */
-    color: #4A3C30; /* لون نص جديد */
+    background: #D2B48C; /* Tan */
+    color: #5A4A3C; /* لون نص جديد */
     padding: 8px 16px;
     border: none;
     border-radius: 8px;
@@ -358,7 +364,7 @@ h1 {
 
 #hint-button:hover:not(.disabled) {
     transform: scale(1.05);
-    background: #DAA520; /* Goldenrod */
+    background: #BC8F8F; /* RosyBrown */
     opacity: 0.9;
 }
 
@@ -380,7 +386,7 @@ h1 {
 }
 
 .next-round, .return-button {
-    background: #CD5C5C; /* IndianRed */
+    background: #BC8F8F; /* RosyBrown */
     color: white;
     padding: 8px 16px;
     border: none;
@@ -396,11 +402,11 @@ h1 {
 .next-round:hover, .return-button:hover {
     transform: scale(1.05);
     opacity: 0.9;
-    background: #B22222; /* Firebrick */
+    background: #A52A2A; /* Brown */
 }
 
 .bottom-container {
-    background: #FFF8DC; /* Cornsilk */
+    background: #FDF5E6; /* OldLace */
     border-radius: 10px;
     padding: 10px;
     width: 90%;
@@ -426,14 +432,14 @@ h1 {
 
 .bottom-container #timer {
     font-size: 1.4rem;
-    color: #4A3C30; /* لون نص جديد */
+    color: #5A4A3C; /* لون نص جديد */
     text-shadow: none;
 }
 
 .bottom-container #time-input {
     padding: 5px;
     font-size: 0.8rem;
-    border: 2px solid #8B4513; /* لون جديد */
+    border: 2px solid #B8860B; /* لون جديد */
     border-radius: 5px;
     width: 50px;
 }
@@ -445,8 +451,8 @@ h1 {
 }
 
 .team {
-    background: #87CEEB; /* SkyBlue */
-    color: #4A3C30; /* لون نص جديد */
+    background: #F0E68C; /* Khaki */
+    color: #5A4A3C; /* لون نص جديد */
     padding: 5px;
     border-radius: 8px;
     width: calc(50% - 6px);
@@ -466,7 +472,7 @@ h1 {
 }
 
 .score-button {
-    background: #3CB371; /* MediumSeaGreen */
+    background: #8FBC8F; /* DarkSeaGreen */
     color: white;
     padding: 5px 10px;
     border: none;
@@ -479,7 +485,7 @@ h1 {
 
 .score-button:hover {
     transform: scale(1.05);
-    background: #2E8B57; /* SeaGreen */
+    background: #6B8E23; /* OliveDrab */
 }
 
 footer {
@@ -487,9 +493,9 @@ footer {
     bottom: 0;
     left: 0;
     width: 100%;
-    background: rgba(255, 248, 220, 0.5); /* خلفية شفافة فاتحة */
+    background: rgba(245, 245, 220, 0.7); /* خلفية شفافة فاتحة (Linen) */
     backdrop-filter: blur(5px);
-    color: #4A3C30; /* لون نص جديد */
+    color: #5A4A3C; /* لون نص جديد */
     text-align: center;
     font-size: 0.8rem;
     padding: 10px 0;
@@ -497,7 +503,7 @@ footer {
 }
 
 .announcement-card {
-    background: #FFFACD; /* LemonChiffon */
+    background: #FFF8DC; /* Cornsilk */
     border-radius: 10px;
     padding: 8px;
     margin: 3px;
@@ -510,7 +516,7 @@ footer {
 .announcement-card h3 {
     margin: 0 0 6px;
     font-size: 0.9rem;
-    color: #4A3C30; /* لون نص جديد */
+    color: #5A4A3C; /* لون نص جديد */
 }
 
 .announcement-card p {
@@ -520,7 +526,7 @@ footer {
 }
 
 .announcement-card button {
-    background: #8B4513; /* SaddleBrown */
+    background: #B8860B; /* DarkGoldenrod */
     color: white;
     padding: 5px 10px;
     border: none;
