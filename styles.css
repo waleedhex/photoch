@@ -1,7 +1,7 @@
 body {
     font-family: 'Tajawal', sans-serif;
-    /* ذوق جديد للألوان: تدرج أخضر فاتح وهادئ */
-    background: linear-gradient(135deg, #C8E6C9, #A3D9B6); /* Pale Green to Medium Aquamarine */
+    /* ذوق جديد للألوان: تدرج أزرق فاتح وتركوازي */
+    background: linear-gradient(135deg, #E0F2F7, #B2EBF2); /* Light Cyan to Pale Turquoise */
     margin: 0;
     min-height: 100vh;
     width: 100vw;
@@ -49,12 +49,12 @@ body {
     flex-direction: column;
     align-items: center;
     transition: height 0.3s ease;
-    /* توزيع العناصر بشكل متساوٍ لمنتصف الشاشة */
-    justify-content: space-evenly;
+    /* لتجميع العناصر في المنتصف */
+    justify-content: center;
 }
 
 #access-code-container {
-    color: #2F4F4F; /* لون نص جديد (DarkSlateGray) */
+    color: #2F3C47; /* لون نص جديد (Dark Blue-Gray) */
     text-align: center;
     z-index: 100;
 }
@@ -64,15 +64,18 @@ body {
     flex-direction: column;
     align-items: center;
     gap: 10px;
-    margin-top: 20px;
+    margin-top: auto; /* لدفعها إلى أسفل الحاوية */
+    margin-bottom: 20px; /* لإعطاء مساحة أسفلها */
     width: 90%;
     max-width: 400px;
+    z-index: 100; /* للتأكد من ظهورها */
 }
+
 
 #categories-container {
     justify-content: flex-start;
     overflow: hidden;
-    color: #2F4F4F; /* لون نص جديد */
+    color: #2F3C47; /* لون نص جديد */
     text-align: center;
     align-items: center;
 }
@@ -83,7 +86,7 @@ body {
     left: 0;
     width: 100%;
     max-width: 100%;
-    background: rgba(200, 230, 201, 0.7); /* خلفية شفافة (Pale Green) */
+    background: rgba(224, 242, 247, 0.7); /* خلفية شفافة (Light Cyan) */
     backdrop-filter: blur(5px);
     z-index: 200;
     display: flex;
@@ -107,19 +110,19 @@ body {
     max-width: 90%;
     border-radius: 5px;
     z-index: 110;
-    margin-bottom: 15px; /* تقليل المسافة تحت حقل الإدخال */
+    margin-bottom: 10px; /* تقليل المسافة لتقريبها من الزر */
 }
 
 /* زر البداية والتأكيد: حجم أكبر وفي المنتصف */
 #access-code-container button, #random-start, #start-game {
     padding: 15px 30px;
     font-size: 1.5rem;
-    background: #5F9EA0; /* CadetBlue */
+    background: #5DADE2; /* Cerulean Blue */
     color: white;
     border: none;
     border-radius: 8px;
     cursor: pointer;
-    margin: 15px 0; /* مسافة أعلى وأسفل لتقريب العناصر */
+    margin: 10px 0; /* مسافة لتقريب العناصر من بعضها */
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
     transition: transform 0.3s ease, background 0.3s ease;
     z-index: 120;
@@ -129,24 +132,25 @@ body {
 }
 
 #random-start {
-    background: #4682B4; /* SteelBlue - لون مختلف قليلاً لزر البداية العشوائية */
+    background: #3498DB; /* Bright Blue - لون مختلف قليلاً لزر البداية العشوائية */
 }
 
 #access-code-container button:hover, #random-start:hover, #start-game:hover {
     transform: scale(1.05);
-    background: #4682B4; /* SteelBlue */
+    background: #3498DB; /* Bright Blue */
 }
 
 /* زر "حفظ كتطبيق" (Install button): أصغر و أسفل زر البداية */
 .install-prompt {
     padding: 10px 20px;
     font-size: 0.9rem;
-    background: #FFD700; /* Gold */
-    color: #2F4F4F; /* لون نص جديد */
+    background: #CCCCCC; /* Light Gray */
+    color: #2F3C47; /* لون نص جديد */
     border: none;
     border-radius: 8px;
     cursor: pointer;
-    margin: 10px 0; /* هوامش رأسية للتباعد */
+    margin-top: 10px; /* مسافة لتقريبه من زر البداية */
+    margin-bottom: 20px; /* مسافة أسفله */
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
     transition: transform 0.3s ease, background 0.3s ease;
     z-index: 120;
@@ -157,7 +161,7 @@ body {
 
 .install-prompt:hover {
     transform: scale(1.05);
-    background: #DAA520; /* Goldenrod */
+    background: #AAAAAA; /* Medium Gray */
 }
 
 #categories-grid {
@@ -180,7 +184,7 @@ body {
 }
 
 .category-card {
-    background: #F8F8FF; /* GhostWhite */
+    background: #FFFFFF; /* White */
     border-radius: 8px;
     padding: 6px;
     box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
@@ -205,7 +209,7 @@ body {
 .category-card p {
     margin: 6px 0 0;
     font-size: 0.85rem;
-    color: #2F4F4F; /* لون نص جديد */
+    color: #2F3C47; /* لون نص جديد */
 }
 
 #game-container {
@@ -219,7 +223,7 @@ body {
 }
 
 h1 {
-    color: #2F4F4F; /* لون نص جديد */
+    color: #2F3C47; /* لون نص جديد */
     font-size: 1.5rem;
     margin: 3px 0;
     font-weight: 700;
@@ -227,7 +231,7 @@ h1 {
 }
 
 .instructions {
-    color: #2F4F4F; /* لون نص جديد */
+    color: #2F3C47; /* لون نص جديد */
     font-size: 0.9rem;
     margin: 3px 0;
     line-height: 1.2;
@@ -255,7 +259,7 @@ h1 {
 
 #timer {
     font-size: 1.6rem;
-    color: #5F9EA0; /* لون جديد */
+    color: #5DADE2; /* لون جديد */
     font-weight: bold;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 }
@@ -263,7 +267,7 @@ h1 {
 #time-input {
     padding: 5px;
     font-size: 0.8rem;
-    border: 2px solid #5F9EA0; /* لون جديد */
+    border: 2px solid #5DADE2; /* لون جديد */
     border-radius: 5px;
     width: 50px;
 }
@@ -271,7 +275,7 @@ h1 {
 #start-timer-button {
     padding: 8px 16px;
     font-size: 0.9rem;
-    background: #3CB371; /* MediumSeaGreen */
+    background: #4DB6AC; /* Dark Turquoise */
     color: white;
     border: none;
     border-radius: 8px;
@@ -282,7 +286,7 @@ h1 {
 
 #start-timer-button:hover {
     transform: scale(1.05);
-    background: #2E8B57; /* SeaGreen */
+    background: #26A69A; /* Teal */
 }
 
 .image-section {
@@ -317,7 +321,7 @@ h1 {
     position: absolute;
     top: 5px;
     right: 10px;
-    background: rgba(47, 79, 79, 0.8); /* لون جديد */
+    background: rgba(47, 60, 71, 0.8); /* لون جديد */
     color: white;
     padding: 3px 8px;
     font-size: 20px;
@@ -331,12 +335,12 @@ h1 {
     top: 15%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: rgba(47, 79, 79, 0.7); /* لون خلفية جديد */
+    background: rgba(47, 60, 71, 0.7); /* لون خلفية جديد */
     color: white;
     padding: 15px;
     font-size: 2rem;
     font-weight: bold;
-    border: 2px solid #FFD700; /* Gold border */
+    border: 2px solid #CCCCCC; /* Light Gray border */
     border-radius: 8px;
     text-align: center;
     z-index: 10;
@@ -344,8 +348,8 @@ h1 {
 
 /* زر إظهار الحل: في المنتصف (أفقيًا) */
 #hint-button {
-    background: #FFD700; /* Gold */
-    color: #2F4F4F; /* لون نص جديد */
+    background: #CCCCCC; /* Light Gray */
+    color: #2F3C47; /* لون نص جديد */
     padding: 8px 16px;
     border: none;
     border-radius: 8px;
@@ -360,7 +364,7 @@ h1 {
 
 #hint-button:hover:not(.disabled) {
     transform: scale(1.05);
-    background: #DAA520; /* Goldenrod */
+    background: #AAAAAA; /* Medium Gray */
     opacity: 0.9;
 }
 
@@ -382,7 +386,7 @@ h1 {
 }
 
 .next-round, .return-button {
-    background: #B22222; /* Firebrick */
+    background: #7B68EE; /* MediumSlateBlue */
     color: white;
     padding: 8px 16px;
     border: none;
@@ -398,11 +402,11 @@ h1 {
 .next-round:hover, .return-button:hover {
     transform: scale(1.05);
     opacity: 0.9;
-    background: #8B0000; /* DarkRed */
+    background: #6A5ACD; /* SlateBlue */
 }
 
 .bottom-container {
-    background: #F0F8FF; /* AliceBlue */
+    background: #F8F8F8; /* Light Grayish White */
     border-radius: 10px;
     padding: 10px;
     width: 90%;
@@ -428,14 +432,14 @@ h1 {
 
 .bottom-container #timer {
     font-size: 1.4rem;
-    color: #2F4F4F; /* لون نص جديد */
+    color: #2F3C47; /* لون نص جديد */
     text-shadow: none;
 }
 
 .bottom-container #time-input {
     padding: 5px;
     font-size: 0.8rem;
-    border: 2px solid #5F9EA0; /* لون جديد */
+    border: 2px solid #5DADE2; /* لون جديد */
     border-radius: 5px;
     width: 50px;
 }
@@ -447,8 +451,8 @@ h1 {
 }
 
 .team {
-    background: #ADD8E6; /* LightBlue */
-    color: #2F4F4F; /* لون نص جديد */
+    background: #BBDEFB; /* Light Blue */
+    color: #2F3C47; /* لون نص جديد */
     padding: 5px;
     border-radius: 8px;
     width: calc(50% - 6px);
@@ -468,7 +472,7 @@ h1 {
 }
 
 .score-button {
-    background: #3CB371; /* MediumSeaGreen */
+    background: #4DB6AC; /* Dark Turquoise */
     color: white;
     padding: 5px 10px;
     border: none;
@@ -481,7 +485,7 @@ h1 {
 
 .score-button:hover {
     transform: scale(1.05);
-    background: #2E8B57; /* SeaGreen */
+    background: #26A69A; /* Teal */
 }
 
 footer {
@@ -489,9 +493,9 @@ footer {
     bottom: 0;
     left: 0;
     width: 100%;
-    background: rgba(200, 230, 201, 0.7); /* خلفية شفافة (Pale Green) */
+    background: rgba(224, 242, 247, 0.7); /* خلفية شفافة (Light Cyan) */
     backdrop-filter: blur(5px);
-    color: #2F4F4F; /* لون نص جديد */
+    color: #2F3C47; /* لون نص جديد */
     text-align: center;
     font-size: 0.8rem;
     padding: 10px 0;
@@ -499,7 +503,7 @@ footer {
 }
 
 .announcement-card {
-    background: #F8F8FF; /* GhostWhite */
+    background: #FFFFFF; /* White */
     border-radius: 10px;
     padding: 8px;
     margin: 3px;
@@ -512,17 +516,17 @@ footer {
 .announcement-card h3 {
     margin: 0 0 6px;
     font-size: 0.9rem;
-    color: #2F4F4F; /* لون نص جديد */
+    color: #2F3C47; /* لون نص جديد */
 }
 
 .announcement-card p {
     margin: 0 0 6px;
     font-size: 0.8rem;
-    color: #666;
+    color: #555;
 }
 
 .announcement-card button {
-    background: #5F9EA0; /* CadetBlue */
+    background: #5DADE2; /* Cerulean Blue */
     color: white;
     padding: 5px 10px;
     border: none;
