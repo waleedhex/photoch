@@ -4,91 +4,68 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>تحدي الصور</title>
-    <link rel="manifest" href="/manifest.json">
-    <meta name="theme-color" content="#4ecdc4">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <meta name="apple-mobile-web-app-title" content="تحدي الصور">
     <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
 </head>
 <body>
+    <div class="sticker sticker-top-left"></div>
+    <div class="sticker sticker-bottom-right"></div>
 
-<div class="sticker sticker-top-left"></div>
-<div class="sticker sticker-bottom-right"></div>
-
-<div id="start-container">
-    <button id="start-game">بداية</button>
-    <button id="install-button" class="install-prompt" style="display: none;">أخذ نسخة محلية</button>
-</div>
-
-<div id="game-container" style="display: none;">
-    <div class="header-section">
+    <div id="access-code-container">
         <h1>تحدي الصور</h1>
-        <p class="instructions">أجب قبل انتهاء الوقت!</p>
+        <input type="text" id="access-code" placeholder="أدخل رمز الوصول">
+        <button id="verify-button">تأكيد</button>
+        <span id="verifying-indicator" style="display: none;">🔄 جار التحقق...</span>
     </div>
-    <div class="main-content">
-        <div class="image-section">
-            <div class="image-container">
-                <img src="" id="game-image" class="game-image">
+
+    <div id="start-container" style="display: none;">
+        <h1>تحدي الصور</h1>
+        <button id="start-game">بداية</button>
+        <button id="install-button">أخذ نسخة محلية</button>
+    </div>
+
+    <div id="game-container" style="display: none;">
+        <div class="header-section">
+            <h1>تحدي الصور</h1>
+            <p class="instructions">أجب قبل انتهاء الوقت! نقطة واحدة لكل جولة</p>
+        </div>
+        <div class="main-content">
+            <div class="image-section">
+                <div class="image-container">
+                    <div id="solution-text"></div>
+                    <img id="game-image" src="assets/default_category.webp" alt="صورة اللعبة">
+                </div>
+                <button id="hint-button">إظهار الحل</button>
+            </div>
+            <div class="score-section">
+                <div class="bottom-container">
+                    <div class="timer-container">
+                        <span id="timer">01:00</span>
+                        <input type="number" id="time-input" value="60">
+                        <button id="start-timer-button">بدء العداد</button>
+                    </div>
+                    <div class="score-container">
+                        <div class="team">
+                            <h2>الفريق الأول</h2>
+                            <p id="team1-score">0</p>
+                            <button class="score-button" onclick="addScore(1)">إضافة نقطة</button>
+                        </div>
+                        <div class="team">
+                            <h2>الفريق الثاني</h2>
+                            <p id="team2-score">0</p>
+                            <button class="score-button" onclick="addScore(2)">إضافة نقطة</button>
+                        </div>
+                    </div>
+                    <div class="button-container">
+                        <button class="next-round" onclick="nextRound()">الجولة التالية</button>
+                        <button class="return-button" onclick="returnToStart()">عودة</button>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="score-section">
-            <div class="bottom-container">
-                <div class="timer-container">
-                    <span id="timer">01:00</span>
-                    <input type="number" id="time-input" value="60">
-                    <button id="start-timer-button">بدء العداد</button>
-                </div>
-                <div class="score-container">
-                    <div class="team">
-                        <h2>الفريق الأول</h2>
-                        <p id="team1-score">0</p>
-                        <button class="score-button" onclick="addScore(1)">إضافة نقاط</button>
-                    </div>
-                    <div class="team">
-                        <h2>الفريق الثاني</h2>
-                        <p id="team2-score">0</p>
-                        <button class="score-button" onclick="addScore(2)">إضافة نقاط</button>
-                    </div>
-                </div>
-                <div class="button-container">
-                    <button class="next-round" onclick="nextRound()">الجولة التالية</button>
-                    <button class="return-button" onclick="returnToCategories()">عودة</button>
-                    <button id="hint-button" class="hint-button" onclick="playHint()">إظهار الحل</button>
-                </div>
-            </div>
-        </div>
     </div>
-</div>
 
-<footer>
-    © 2025 تحدي الصور - جميع الحقوق محفوظة
-</footer>
-
-<script src="script.js"></script>
-<script>
-    if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-            navigator.serviceWorker.register('/sw.js')
-                .then(registration => {
-                    console.log('Service Worker registered:', registration);
-                })
-                .catch(error => {
-                    console.error('Service Worker registration failed:', error);
-                });
-        });
-    }
-
-    window.addEventListener('load', () => {
-        if (!navigator.onLine || window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone) {
-            console.log('أوفلاين أو في وضع PWA، تخطي شاشة البداية...');
-            document.getElementById('start-container').style.display = 'none';
-            document.getElementById('game-container').style.display = 'flex';
-            startGame();
-        }
-    });
-</script>
-
+    <div id="announcements-container"></div>
+    <footer>© 2025 تحدي الصور - جميع الحقوق محفوظة</footer>
 </body>
 </html>

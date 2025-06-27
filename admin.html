@@ -1,122 +1,30 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>إدارة تحدي الصور</title>
-    <link rel="manifest" href="/manifest.json">
-    <meta name="theme-color" content="#4ecdc4">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Tajawal', sans-serif;
-            background: linear-gradient(135deg, #F5F5DC, #E6D7B9); /* Beige and light brown */
+            background: linear-gradient(135deg, #F5F5DC, #E6D7B9);
             background-attachment: fixed;
             margin: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
             min-height: 100vh;
-            color: #333333; /* Dark gray for body text */
-            box-sizing: border-box;
-        }
-        h1 {
-            margin: 20px 0;
-            color: #333333; /* Dark gray for headings */
-            font-size: 1.8rem;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
-        }
-        h2 {
-            margin: 20px 0 10px 0;
-            font-size: 1.5em;
-            color: #333333; /* Dark gray for subheadings */
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
-            text-align: center;
-        }
-        section {
-            background: rgba(245, 245, 220, 0.9); /* Lighter beige for sections */
-            color: #333;
-            padding: 20px;
-            border-radius: 15px; /* More rounded corners */
-            margin: 15px 0; /* Increased margin */
-            width: 90%;
-            max-width: 800px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Stronger shadow */
-            box-sizing: border-box;
+            width: 100vw;
+            position: relative;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            gap: 10px; /* Space between elements in section */
-        }
-        input {
-            padding: 12px; /* Increased padding */
-            margin: 5px 0;
-            border: 1px solid #ccc;
-            border-radius: 10px; /* More rounded input fields */
-            width: calc(100% - 24px); /* Adjust for padding */
-            font-size: 1rem;
+            overflow: hidden;
             box-sizing: border-box;
+            transition: all 0.3s ease;
         }
-        button {
-            padding: 12px 25px; /* Increased padding */
-            margin: 5px;
-            background: #6B7280; /* Gray for buttons */
-            color: #FFFFFF;
-            border: none;
-            border-radius: 10px; /* More rounded buttons */
-            cursor: pointer;
-            font-size: 1rem;
-            transition: background 0.3s ease, transform 0.3s ease;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow for buttons */
-        }
-        button:hover {
-            background: #4B5E40; /* Darker green on hover */
-            transform: translateY(-3px);
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 10px 0;
-            background: #A7F3D0; /* Greenish background for tables */
-            border-radius: 10px;
-            overflow: hidden; /* For rounded corners on table */
-        }
-        th, td {
-            padding: 12px; /* Increased padding */
-            border: 1px solid rgba(0, 0, 0, 0.1); /* Lighter border */
-            text-align: center;
-            color: #333333;
-        }
-        th {
-            background: #8FC0A9; /* Slightly darker green for table header */
-            font-weight: bold;
-        }
-        .scrollable-table {
-            max-height: 300px;
-            overflow-y: auto;
-            display: block;
-            border: 1px solid #ccc;
-            border-radius: 10px; /* Rounded corners for scrollable container */
-            margin: 10px 0;
-            width: 100%; /* Ensure it takes full width of section */
-        }
-        .delete-button {
-            background: #e74c3c; /* Red for delete buttons */
-            padding: 8px 15px; /* Smaller padding for delete buttons */
-            font-size: 0.9rem;
-            box-shadow: none; /* No extra shadow for delete buttons */
-        }
-        .delete-button:hover {
-            background: #c0392b;
-            transform: none; /* No transform on hover for delete */
-        }
+
         .sticker {
             position: absolute;
-            z-index: 50; /* Higher z-index for stickers */
-            opacity: 0.8; /* Adjusted for theme */
+            z-index: 50;
         }
+
         .sticker-top-left {
             top: 10px;
             left: 10px;
@@ -124,7 +32,9 @@
             height: 50px;
             background: url('assets/stickers/sticker1.png') no-repeat center;
             background-size: contain;
+            opacity: 0.8;
         }
+
         .sticker-bottom-right {
             bottom: 10px;
             right: 10px;
@@ -132,100 +42,181 @@
             height: 50px;
             background: url('assets/stickers/sticker2.png') no-repeat center;
             background-size: contain;
+            opacity: 0.8;
         }
-        .error {
-            color: #e74c3c; /* Red for error messages */
-            font-size: 0.9rem;
-            margin: 5px 0;
-            text-align: center;
+
+        #admin-container {
             width: 100%;
-        }
-        /* Install button styling (matching other buttons) */
-        .install-prompt {
-            background: #6B7280; /* Gray for buttons */
-            color: #FFFFFF;
-            border: none;
-            border-radius: 10px;
-            padding: 12px 25px;
-            font-size: 1rem;
-            cursor: pointer;
-            margin: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            transition: background 0.3s ease, transform 0.3s ease;
-        }
-        .install-prompt:hover {
-            background: #4B5E40; /* Darker green on hover */
-            transform: translateY(-3px);
-        }
-        #login-section {
-            background: rgba(245, 245, 220, 0.9);
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            max-width: 100vw;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            overflow-x: hidden;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 15px;
-        }
-        #login-section input {
-            width: 250px;
-        }
-        #login-section button {
-            width: 150px;
+            justify-content: center;
+            color: #333333;
+            text-align: center;
+            z-index: 100;
         }
 
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 1.5rem;
-            }
-            h2 {
-                font-size: 1.3em;
-            }
-            section {
-                padding: 15px;
-                margin: 10px 0;
-            }
-            input {
-                padding: 10px;
-                width: calc(100% - 20px);
-            }
-            button {
-                padding: 10px 20px;
-                font-size: 0.9rem;
-            }
-            th, td {
-                padding: 10px;
-                font-size: 0.9rem;
-            }
-            .delete-button {
-                padding: 6px 10px;
-                font-size: 0.8rem;
-            }
-            .sticker {
-                width: 80px;
-                height: 40px;
-            }
+        .admin-section {
+            background: rgba(245, 245, 220, 0.9);
+            border-radius: 10px;
+            padding: 10px;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+            margin: 10px auto;
+            box-sizing: border-box;
+        }
+
+        .admin-button {
+            padding: 10px 20px;
+            font-size: 1rem;
+            background: #6B7280;
+            color: #FFFFFF;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            margin: 10px;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+
+        .admin-button:hover {
+            background: #4B5E40;
+            transform: scale(1.05);
+        }
+
+        .admin-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #A7F3D0;
+            color: #333333;
+            margin: 10px 0;
+        }
+
+        .admin-table th, .admin-table td {
+            padding: 8px;
+            border: 1px solid #6B7280;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        .admin-table th {
+            background: #6B7280;
+            color: #FFFFFF;
+        }
+
+        .admin-table button {
+            background: #6B7280;
+            color: #FFFFFF;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+
+        .admin-table button:hover {
+            background: #4B5E40;
+            transform: scale(1.05);
+        }
+
+        h1 {
+            color: #333333;
+            font-size: 1.8rem;
+            margin: 3px 0;
+            font-weight: 700;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #333333;
+            font-size: 1.4rem;
+            margin: 10px 0;
+            font-weight: 700;
+        }
+
+        h3 {
+            color: #333333;
+            font-size: 1.2rem;
+            margin: 8px 0;
+        }
+
+        .offline-message {
+            color: #333333;
+            font-size: 1rem;
+            margin: 10px 0;
+        }
+
+        input {
+            padding: 8px;
+            font-size: 0.9rem;
+            width: 180px;
+            max-width: 90%;
+            border-radius: 5px;
+            border: 2px solid #6B7280;
+        }
+
+        footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: #F5F5DC;
+            color: #6B7280;
+            text-align: center;
+            font-size: 0.8rem;
+            padding: 10px 0;
+            z-index: 200;
         }
 
         @media (max-width: 600px) {
             h1 {
-                font-size: 1.3em;
+                font-size: 1.5rem;
             }
-            section {
+            h2 {
+                font-size: 1.2rem;
+            }
+            h3 {
+                font-size: 1rem;
+            }
+            .admin-section {
                 width: 95%;
+                padding: 8px;
             }
-            input, button {
-                width: calc(100% - 20px);
+            .admin-button {
+                padding: 8px 16px;
+                font-size: 0.9rem;
             }
-            .sticker {
+            .admin-table th, .admin-table td {
+                font-size: 0.8rem;
+                padding: 6px;
+            }
+            .sticker-top-left, .sticker-bottom-right {
                 width: 60px;
                 height: 30px;
             }
-            #login-section input {
-                width: 90%;
+            footer {
+                font-size: 0.7rem;
+                padding: 8px 0;
             }
-            #login-section button {
-                width: 80%;
+        }
+
+        @media (max-width: 360px) {
+            h1 {
+                font-size: 1.2rem;
+            }
+            .admin-section {
+                width: 100%;
+            }
+            input {
+                width: 160px;
             }
         }
     </style>
@@ -234,61 +225,60 @@
     <div class="sticker sticker-top-left"></div>
     <div class="sticker sticker-bottom-right"></div>
 
-    <h1>تسجيل دخول الإدارة</h1>
-    <div id="offline-message" style="display: none;">
-        <p class="error">هذه الصفحة غير متاحة في الوضع الأوفلاين</p>
-    </div>
-    <div id="login-section">
-        <input type="password" id="admin-code" placeholder="رمز الأدمن">
-        <button onclick="verifyAdminCode()">تسجيل الدخول</button>
-        <p id="login-error" class="error"></p>
-    </div>
-
-    <div id="admin-panel" style="display: none;">
+    <div id="admin-container">
         <h1>إدارة تحدي الصور</h1>
-        <button id="install-button" class="install-prompt" style="display: none;">استخدام الإدارة بدون اتصال بالإنترنت</button>
+        <p class="offline-message">هذه الصفحة غير متاحة في الوضع الأوفلاين</p>
 
-        <section>
-            <h2>توليد رموز جديدة</h2>
-            <input type="number" id="code-count-p" placeholder="عدد رموز فئة p" min="0">
-            <input type="number" id="code-count-x" placeholder="عدد رموز فئة x" min="0">
-            <button onclick="generateCodes()">توليد الرموز</button>
-            <button onclick="copyCodes()">نسخ الرموز الجديدة</button>
-            <p id="generated-codes"></p>
-            <p id="generate-error" class="error"></p>
-        </section>
+        <div class="admin-section" id="login-section">
+            <input type="text" id="admin-code" placeholder="أدخل رمز الإدارة">
+            <button id="admin-login-button" class="admin-button">تسجيل الدخول</button>
+        </div>
 
-        <section>
-            <h2>إضافة وحذف رموز</h2>
-            <input type="text" id="new-codes" placeholder="الرموز (مفصولة بمسافات)">
-            <button onclick="addCodes()">إضافة الرموز</button>
-            <input type="text" id="delete-codes" placeholder="رموز للحذف (مفصولة بمسافات)">
-            <button onclick="deleteCodes()">حذف الرموز</button>
-            <p id="codes-error" class="error"></p>
-            <div class="scrollable-table">
-                <table id="codes-table">
+        <div class="admin-section" id="admin-panel" style="display: none;">
+            <h2>استخدام الإدارة بدون اتصال بالإنترنت</h2>
+
+            <div class="admin-section">
+                <h3>توليد رموز جديدة</h3>
+                <input type="number" id="code-count" placeholder="عدد الرموز">
+                <button id="generate-codes" class="admin-button">توليد الرموز</button>
+                <button id="copy-codes" class="admin-button">نسخ الرموز الجديدة</button>
+                <table id="codes-table" class="admin-table">
                     <thead>
                         <tr>
                             <th>الرمز</th>
                             <th>إجراء</th>
                         </tr>
                     </thead>
-                    <tbody id="codes-table-body"></tbody>
+                    <tbody></tbody>
                 </table>
+                <button id="export-codes" class="admin-button">تصدير codes.json</button>
             </div>
-            <button onclick="exportCodes()">تصدير codes.json</button>
-        </section>
 
-        <section>
-            <h2>إدارة الإعلانات</h2>
-            <input type="text" id="announcement-title" placeholder="العنوان">
-            <input type="text" id="announcement-text" placeholder="النص">
-            <input type="text" id="announcement-link" placeholder="الرابط">
-            <input type="text" id="announcement-button" placeholder="نص الزر">
-            <button onclick="addAnnouncement()">تأكيد</button>
-            <p id="announcements-error" class="error"></p>
-            <div class="scrollable-table">
-                <table id="announcements-table">
+            <div class="admin-section">
+                <h3>إضافة وحذف رموز</h3>
+                <input type="text" id="new-code" placeholder="إضافة رمز جديد">
+                <button id="add-code" class="admin-button">إضافة الرمز</button>
+                <button id="delete-code" class="admin-button">حذف الرمز</button>
+                <table id="existing-codes-table" class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>الرمز</th>
+                            <th>إجراء</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+                <button id="export-existing-codes" class="admin-button">تصدير codes.json</button>
+            </div>
+
+            <div class="admin-section">
+                <h3>إدارة الإعلانات</h3>
+                <input type="text" id="announcement-title" placeholder="عنوان الإعلان">
+                <input type="text" id="announcement-text" placeholder="نص الإعلان">
+                <input type="text" id="announcement-link" placeholder="رابط الإعلان">
+                <input type="text" id="announcement-button" placeholder="نص الزر">
+                <button id="add-announcement" class="admin-button">تأكيد</button>
+                <table id="announcements-table" class="admin-table">
                     <thead>
                         <tr>
                             <th>العنوان</th>
@@ -298,20 +288,17 @@
                             <th>إجراء</th>
                         </tr>
                     </thead>
-                    <tbody id="announcements-table-body"></tbody>
+                    <tbody></tbody>
                 </table>
+                <button id="export-announcements" class="admin-button">تصدير announcements.json</button>
             </div>
-            <button onclick="exportAnnouncements()">تصدير announcements.json</button>
-        </section>
 
-        <section>
-            <h2>إدارة التصنيفات</h2>
-            <input type="text" id="category-name" placeholder="اسم التصنيف">
-            <input type="text" id="category-image" placeholder="مسار الصورة">
-            <button onclick="addCategory()">تأكيد</button>
-            <p id="categories-error" class="error"></p>
-            <div class="scrollable-table">
-                <table id="categories-table">
+            <div class="admin-section">
+                <h3>إدارة التصنيفات</h3>
+                <input type="text" id="category-name" placeholder="اسم التصنيف">
+                <input type="text" id="category-image" placeholder="رابط الصورة">
+                <button id="add-category" class="admin-button">تأكيد</button>
+                <table id="categories-table" class="admin-table">
                     <thead>
                         <tr>
                             <th>الاسم</th>
@@ -319,230 +306,71 @@
                             <th>إجراء</th>
                         </tr>
                     </thead>
-                    <tbody id="categories-table-body"></tbody>
+                    <tbody></tbody>
                 </table>
             </div>
-        </section>
 
-        <button onclick="exportFiles()">تصدير الملفات</button>
+            <button id="export-files" class="admin-button">تصدير الملفات</button>
+        </div>
     </div>
 
+    <footer>© 2025 تحدي الصور - جميع الحقوق محفوظة</footer>
+
     <script>
-        // رمز الأدمن لتسجيل الدخول
         const ADMIN_CODE = 'wfra1403';
 
-        // متغيرات عالمية لتخزين البيانات
-        let codes = { validCodes: [] };
-        let announcements = { announcements: [] };
-        let categories = { categories: [] };
-        let generatedCodes = [];
-
-        // دالة للتحقق مما إذا كان المستخدم أوفلاين
-        function isOffline() {
-            return !navigator.onLine;
+        function isOfflineOrPWA() {
+            return !navigator.onLine || window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone;
         }
 
-        // التحقق من الاتصال عند تحميل الصفحة
-        window.addEventListener('load', () => {
-            if (isOffline()) {
-                console.log('أوفلاين، منع الوصول إلى صفحة الإدارة...');
-                document.getElementById('login-section').style.display = 'none';
-                document.getElementById('admin-panel').style.display = 'none';
-                document.getElementById('offline-message').style.display = 'block';
-            }
-        });
-
-        // تحميل البيانات عند تسجيل الدخول
-        async function verifyAdminCode() {
-            // التحقق من الاتصال قبل محاولة تسجيل الدخول
-            if (isOffline()) {
-                console.log('أوفلاين، منع الوصول إلى صفحة الإدارة...');
-                document.getElementById('login-section').style.display = 'none';
-                document.getElementById('admin-panel').style.display = 'none';
-                document.getElementById('offline-message').style.display = 'block';
-                return;
-            }
-
-            const code = document.getElementById('admin-code').value;
-            const error = document.getElementById('login-error');
-            if (code === ADMIN_CODE) {
-                document.getElementById('login-section').style.display = 'none';
-                document.getElementById('admin-panel').style.display = 'block';
-                await loadAdminData();
-                // إظهار زر التثبيت بعد تسجيل الدخول
-                showInstallPrompt();
-            } else {
-                error.textContent = 'رمز أدمن غير صحيح!';
-            }
-        }
-
-        async function loadAdminData() {
-            try {
-                const codesResponse = await fetch('codes.json');
-                if (codesResponse.ok) {
-                    codes = await codesResponse.json();
-                } else {
-                    console.warn('codes.json غير موجود، يتم استخدام افتراضي');
-                }
-                populateCodesTable();
-
-                const announcementsResponse = await fetch('announcements.json');
-                if (announcementsResponse.ok) {
-                    announcements = await announcementsResponse.json();
-                } else {
-                    console.warn('announcements.json غير موجود، يتم استخدام افتراضي');
-                }
-                populateAnnouncementsTable();
-
-                const categoriesResponse = await fetch('categories.json');
-                if (categoriesResponse.ok) {
-                    categories = await categoriesResponse.json();
-                } else {
-                    console.warn('categories.json غير موجود، يتم استخدام افتراضي');
-                }
-                populateCategoriesTable();
-            } catch (error) {
-                console.error('خطأ في تحميل البيانات:', error);
-            }
-        }
-
-        // دالة لتوليد رمز عشوائي (7 خانات)
-        function generateCode(category) {
-            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-            let code;
-            do {
-                code = category;
-                for (let i = 0; i < 6; i++) {
-                    code += chars.charAt(Math.floor(Math.random() * chars.length));
-                }
-            } while (codes.validCodes.includes(code.toUpperCase()));
-            return code.toUpperCase();
-        }
-
-        // توليد رموز جديدة
         function generateCodes() {
-            const countP = parseInt(document.getElementById('code-count-p').value) || 0;
-            const countX = parseInt(document.getElementById('code-count-x').value) || 0;
-            const error = document.getElementById('generate-error');
-            generatedCodes = [];
+            const count = parseInt(document.getElementById('code-count').value) || 1;
+            const codesTable = document.getElementById('codes-table').getElementsByTagName('tbody')[0];
+            codesTable.innerHTML = '';
+            const codes = [];
+            const prefixes = ['p', 'x'];
+            const characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
 
-            if (countP < 0 || countX < 0) {
-                error.textContent = 'يرجى إدخال عدد صحيح غير سالب';
-                return;
+            for (let i = 0; i < count; i++) {
+                const prefix = prefixes[Math.floor(Math.random() * prefixes.length)];
+                let code = prefix;
+                for (let j = 0; j < 7; j++) {
+                    code += characters.charAt(Math.floor(Math.random() * characters.length));
+                }
+                if (!codes.includes(code)) {
+                    codes.push(code);
+                    const row = codesTable.insertRow();
+                    const codeCell = row.insertCell(0);
+                    const actionCell = row.insertCell(1);
+                    codeCell.textContent = code;
+                    const deleteButton = document.createElement('button');
+                    deleteButton.textContent = 'حذف';
+                    deleteButton.className = 'admin-button';
+                    deleteButton.onclick = () => row.remove();
+                    actionCell.appendChild(deleteButton);
+                } else {
+                    i--;
+                }
             }
-
-            for (let i = 0; i < countP; i++) {
-                const code = generateCode('p');
-                generatedCodes.push(code);
-                codes.validCodes.push(code);
-            }
-            for (let i = 0; i < countX; i++) {
-                const code = generateCode('x');
-                generatedCodes.push(code);
-                codes.validCodes.push(code);
-            }
-
-            document.getElementById('generated-codes').textContent = generatedCodes.join(', ');
-            error.textContent = '';
-            populateCodesTable();
+            return codes;
         }
 
-        // نسخ الرموز المولدة
         function copyCodes() {
-            if (generatedCodes.length === 0) {
-                document.getElementById('generate-error').textContent = 'لا توجد رموز لنسخها!';
-                return;
-            }
-            navigator.clipboard.writeText(generatedCodes.join('\n')).then(() => {
+            const codesTable = document.getElementById('codes-table').getElementsByTagName('tbody')[0];
+            const codes = Array.from(codesTable.getElementsByTagName('tr')).map(row => row.cells[0].textContent);
+            navigator.clipboard.writeText(codes.join('\n')).then(() => {
                 alert('تم نسخ الرموز!');
+            }).catch(err => {
+                console.error('فشل نسخ الرموز:', err);
+                alert('فشل نسخ الرموز!');
             });
         }
 
-        // عرض جدول الرموز
-        function populateCodesTable() {
-            const tableBody = document.getElementById('codes-table-body');
-            tableBody.innerHTML = '';
-            codes.validCodes.forEach((code, index) => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${code}</td>
-                    <td><button class="delete-button" onclick="deleteCode(${index})">حذف</button></td>
-                `;
-                tableBody.appendChild(row);
-            });
-        }
-
-        // إضافة رموز جديدة
-        function addCodes() {
-            const newCodesInput = document.getElementById('new-codes').value;
-            const error = document.getElementById('codes-error');
-            const newCodes = newCodesInput.split(' ').filter(code => code.trim() !== '');
-            
-            if (newCodes.length === 0) {
-                error.textContent = 'يرجى إدخال رموز صحيحة';
-                return;
-            }
-
-            let duplicates = [];
-            newCodes.forEach(code => {
-                if (codes.validCodes.includes(code.toUpperCase())) {
-                    duplicates.push(code);
-                } else {
-                    codes.validCodes.push(code.toUpperCase());
-                }
-            });
-
-            if (duplicates.length > 0) {
-                error.textContent = `الرموز التالية مكررة: ${duplicates.join(', ')}`;
-            } else {
-                error.textContent = '';
-            }
-
-            document.getElementById('new-codes').value = '';
-            populateCodesTable();
-        }
-
-        // حذف رمز فردي
-        function deleteCode(index) {
-            codes.validCodes.splice(index, 1);
-            populateCodesTable();
-        }
-
-        // حذف قائمة رموز
-        function deleteCodes() {
-            const codesToDeleteInput = document.getElementById('delete-codes').value;
-            const error = document.getElementById('codes-error');
-            const codesToDelete = codesToDeleteInput.split(' ').filter(code => code.trim() !== '');
-
-            if (codesToDelete.length === 0) {
-                error.textContent = 'يرجى إدخال رموز للحذف';
-                return;
-            }
-
-            let notFound = [];
-            codesToDelete.forEach(code => {
-                const index = codes.validCodes.indexOf(code.toUpperCase());
-                if (index !== -1) {
-                    codes.validCodes.splice(index, 1);
-                } else {
-                    notFound.push(code);
-                }
-            });
-
-            if (notFound.length > 0) {
-                error.textContent = `الرموز التالية غير موجودة: ${notFound.join(', ')}`;
-            } else {
-                error.textContent = '';
-            }
-
-            document.getElementById('delete-codes').value = '';
-            populateCodesTable();
-        }
-
-        // تصدير codes.json
-        function exportCodes() {
-            const codesData = JSON.stringify(codes, null, 2);
-            const blob = new Blob([codesData], { type: 'application/json' });
+        async function exportCodes() {
+            const codesTable = document.getElementById('codes-table').getElementsByTagName('tbody')[0];
+            const codes = Array.from(codesTable.getElementsByTagName('tr')).map(row => row.cells[0].textContent);
+            const data = { validCodes: codes };
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
@@ -551,56 +379,90 @@
             URL.revokeObjectURL(url);
         }
 
-        // عرض جدول الإعلانات
-        function populateAnnouncementsTable() {
-            const tableBody = document.getElementById('announcements-table-body');
-            tableBody.innerHTML = '';
-            announcements.announcements.forEach((ann, index) => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${ann.title || ''}</td>
-                    <td>${ann.text || ''}</td>
-                    <td>${ann.link || ''}</td>
-                    <td>${ann.button || ''}</td>
-                    <td><button class="delete-button" onclick="deleteAnnouncement(${index})">حذف</button></td>
-                `;
-                tableBody.appendChild(row);
-            });
-        }
-
-        // إضافة إعلان
-        function addAnnouncement() {
-            const title = document.getElementById('announcement-title').value;
-            const text = document.getElementById('announcement-text').value;
-            const link = document.getElementById('announcement-link').value;
-            const button = document.getElementById('announcement-button').value;
-            const error = document.getElementById('announcements-error');
-
-            if (!title || !text) {
-                error.textContent = 'يرجى ملء العنوان والنص';
+        async function addCode() {
+            const newCode = document.getElementById('new-code').value.trim();
+            if (!newCode) {
+                alert('الرجاء إدخال رمز!');
                 return;
             }
-
-            const newAnnouncement = { title, text, link, button };
-            announcements.announcements.push(newAnnouncement);
-            document.getElementById('announcement-title').value = '';
-            document.getElementById('announcement-text').value = '';
-            document.getElementById('announcement-link').value = '';
-            document.getElementById('announcement-button').value = '';
-            error.textContent = '';
-            populateAnnouncementsTable();
+            const existingCodesTable = document.getElementById('existing-codes-table').getElementsByTagName('tbody')[0];
+            const row = existingCodesTable.insertRow();
+            const codeCell = row.insertCell(0);
+            const actionCell = row.insertCell(1);
+            codeCell.textContent = newCode;
+            const deleteButton = document.createElement('button');
+            deleteButton.textContent = 'حذف';
+            deleteButton.className = 'admin-button';
+            deleteButton.onclick = () => row.remove();
+            actionCell.appendChild(deleteButton);
         }
 
-        // حذف إعلان
-        function deleteAnnouncement(index) {
-            announcements.announcements.splice(index, 1);
-            populateAnnouncementsTable();
+        async function deleteCode() {
+            const codeToDelete = document.getElementById('new-code').value.trim();
+            if (!codeToDelete) {
+                alert('الرجاء إدخال رمز لحذفه!');
+                return;
+            }
+            const existingCodesTable = document.getElementById('existing-codes-table').getElementsByTagName('tbody')[0];
+            const rows = existingCodesTable.getElementsByTagName('tr');
+            for (let row of rows) {
+                if (row.cells[0].textContent === codeToDelete) {
+                    row.remove();
+                    break;
+                }
+            }
         }
 
-        // تصدير announcements.json
-        function exportAnnouncements() {
-            const announcementsData = JSON.stringify(announcements, null, 2);
-            const blob = new Blob([announcementsData], { type: 'application/json' });
+        async function exportExistingCodes() {
+            const existingCodesTable = document.getElementById('existing-codes-table').getElementsByTagName('tbody')[0];
+            const codes = Array.from(existingCodesTable.getElementsByTagName('tr')).map(row => row.cells[0].textContent);
+            const data = { validCodes: codes };
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'codes.json';
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        async function addAnnouncement() {
+            const title = document.getElementById('announcement-title').value.trim();
+            const text = document.getElementById('announcement-text').value.trim();
+            const link = document.getElementById('announcement-link').value.trim();
+            const buttonText = document.getElementById('announcement-button').value.trim();
+            if (!title || !text) {
+                alert('الرجاء إدخال عنوان ونص الإعلان!');
+                return;
+            }
+            const announcementsTable = document.getElementById('announcements-table').getElementsByTagName('tbody')[0];
+            const row = announcementsTable.insertRow();
+            const titleCell = row.insertCell(0);
+            const textCell = row.insertCell(1);
+            const linkCell = row.insertCell(2);
+            const buttonCell = row.insertCell(3);
+            const actionCell = row.insertCell(4);
+            titleCell.textContent = title;
+            textCell.textContent = text;
+            linkCell.textContent = link;
+            buttonCell.textContent = buttonText;
+            const deleteButton = document.createElement('button');
+            deleteButton.textContent = 'حذف';
+            deleteButton.className = 'admin-button';
+            deleteButton.onclick = () => row.remove();
+            actionCell.appendChild(deleteButton);
+        }
+
+        async function exportAnnouncements() {
+            const announcementsTable = document.getElementById('announcements-table').getElementsByTagName('tbody')[0];
+            const announcements = Array.from(announcementsTable.getElementsByTagName('tr')).map(row => ({
+                title: row.cells[0].textContent,
+                text: row.cells[1].textContent,
+                link: row.cells[2].textContent,
+                button: row.cells[3].textContent
+            }));
+            const data = { announcements };
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
@@ -609,132 +471,62 @@
             URL.revokeObjectURL(url);
         }
 
-        // عرض جدول التصنيفات
-        function populateCategoriesTable() {
-            const tableBody = document.getElementById('categories-table-body');
-            tableBody.innerHTML = '';
-            categories.categories.forEach((cat, index) => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${cat.name}</td>
-                    <td>${cat.image}</td>
-                    <td><button class="delete-button" onclick="deleteCategory(${index})">حذف</button></td>
-                `;
-                tableBody.appendChild(row);
-            });
+        async function addCategory() {
+            const name = document.getElementById('category-name').value.trim();
+            const image = document.getElementById('category-image').value.trim();
+            if (!name || !image) {
+                alert('الرجاء إدخال اسم التصنيف ورابط الصورة!');
+                return;
+            }
+            const categoriesTable = document.getElementById('categories-table').getElementsByTagName('tbody')[0];
+            const row = categoriesTable.insertRow();
+            const nameCell = row.insertCell(0);
+            const imageCell = row.insertCell(1);
+            const actionCell = row.insertCell(2);
+            nameCell.textContent = name;
+            imageCell.textContent = image;
+            const deleteButton = document.createElement('button');
+            deleteButton.textContent = 'حذف';
+            deleteButton.className = 'admin-button';
+            deleteButton.onclick = () => row.remove();
+            actionCell.appendChild(deleteButton);
         }
 
-        // إضافة تصنيف
-        function addCategory() {
-            const name = document.getElementById('category-name').value;
-            const image = document.getElementById('category-image').value;
-            const error = document.getElementById('categories-error');
+        async function exportFiles() {
+            exportCodes();
+            exportExistingCodes();
+            exportAnnouncements();
+            alert('تم تصدير جميع الملفات!');
+        }
 
-            if (!name) {
-                error.textContent = 'يرجى إدخال اسم التصنيف';
+        document.addEventListener('DOMContentLoaded', () => {
+            if (isOfflineOrPWA()) {
+                document.getElementById('login-section').style.display = 'none';
+                document.getElementById('admin-panel').style.display = 'none';
                 return;
             }
 
-            const newCategory = { name, image };
-            categories.categories.push(newCategory);
-            document.getElementById('category-name').value = '';
-            document.getElementById('category-image').value = '';
-            error.textContent = '';
-            populateCategoriesTable();
-        }
-
-        // حذف تصنيف
-        function deleteCategory(index) {
-            categories.categories.splice(index, 1);
-            populateCategoriesTable();
-        }
-
-        // تصدير categories.json (هذه الدالة كانت تصدر categories.json فقط، يمكن تعديلها لتصدير كل شيء)
-        function exportFiles() {
-            // تصدير codes.json
-            const codesData = JSON.stringify(codes, null, 2);
-            const codesBlob = new Blob([codesData], { type: 'application/json' });
-            const codesUrl = URL.createObjectURL(codesBlob);
-            const codesA = document.createElement('a');
-            codesA.href = codesUrl;
-            codesA.download = 'codes.json';
-            codesA.click();
-            URL.revokeObjectURL(codesUrl);
-
-            // تصدير announcements.json
-            const announcementsData = JSON.stringify(announcements, null, 2);
-            const announcementsBlob = new Blob([announcementsData], { type: 'application/json' });
-            const announcementsUrl = URL.createObjectURL(announcementsBlob);
-            const announcementsA = document.createElement('a');
-            announcementsA.href = announcementsUrl;
-            announcementsA.download = 'announcements.json';
-            announcementsA.click();
-            URL.revokeObjectURL(announcementsUrl);
-
-            // تصدير categories.json
-            const categoriesData = JSON.stringify(categories, null, 2);
-            const categoriesBlob = new Blob([categoriesData], { type: 'application/json' });
-            const categoriesUrl = URL.createObjectURL(categoriesBlob);
-            const categoriesA = document.createElement('a');
-            categoriesA.href = categoriesUrl;
-            categoriesA.download = 'categories.json';
-            categoriesA.click();
-            URL.revokeObjectURL(categoriesUrl);
-
-            alert('تم تصدير جميع ملفات الإدارة (codes.json, announcements.json, categories.json)!');
-        }
-
-
-        // دالة لإظهار زر التثبيت
-        let deferredPrompt;
-        function showInstallPrompt() {
-            const installButton = document.getElementById('install-button');
-            // إظهار الزر فقط إذا كان المستخدم أونلاين وليس في وضع PWA
-            if (!isOffline() && !window.matchMedia('(display-mode: standalone)').matches && !window.navigator.standalone) {
-                installButton.style.display = 'block';
-            } else {
-                installButton.style.display = 'none';
-            }
-
-            // التقاط حدث التثبيت
-            window.addEventListener('beforeinstallprompt', (e) => {
-                e.preventDefault();
-                deferredPrompt = e;
-                if (!isOffline() && !window.matchMedia('(display-mode: standalone)').matches && !window.navigator.standalone) {
-                    installButton.style.display = 'block';
-                }
-            });
-
-            installButton.addEventListener('click', () => {
-                if (deferredPrompt) {
-                    deferredPrompt.prompt();
-                    deferredPrompt.userChoice.then((choiceResult) => {
-                        if (choiceResult.outcome === 'accepted') {
-                            console.log('الأدمن وافق على تثبيت لوحة الإدارة');
-                            installButton.style.display = 'none';
-                        } else {
-                            console.log('الأدمن رفض تثبيت لوحة الإدارة');
-                        }
-                        deferredPrompt = null;
-                    });
+            document.getElementById('admin-login-button').addEventListener('click', () => {
+                const code = document.getElementById('admin-code').value.trim();
+                if (code.toLowerCase() === ADMIN_CODE.toLowerCase()) {
+                    document.getElementById('login-section').style.display = 'none';
+                    document.getElementById('admin-panel').style.display = 'block';
                 } else {
-                    alert('لتشغيل لوحة الإدارة أوفلاين، انقر على "إضافة إلى الشاشة الرئيسية" من قائمة المتصفح.');
+                    alert('رمز الإدارة غير صالح!');
                 }
             });
-        }
 
-        // تسجيل Service Worker
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/sw.js')
-                    .then(registration => {
-                        console.log('Service Worker registered:', registration);
-                    })
-                    .catch(error => {
-                        console.error('Service Worker registration failed:', error);
-                    });
-            });
-        }
+            document.getElementById('generate-codes').addEventListener('click', generateCodes);
+            document.getElementById('copy-codes').addEventListener('click', copyCodes);
+            document.getElementById('export-codes').addEventListener('click', exportCodes);
+            document.getElementById('add-code').addEventListener('click', addCode);
+            document.getElementById('delete-code').addEventListener('click', deleteCode);
+            document.getElementById('export-existing-codes').addEventListener('click', exportExistingCodes);
+            document.getElementById('add-announcement').addEventListener('click', addAnnouncement);
+            document.getElementById('export-announcements').addEventListener('click', exportAnnouncements);
+            document.getElementById('add-category').addEventListener('click', addCategory);
+            document.getElementById('export-files').addEventListener('click', exportFiles);
+        });
     </script>
 </body>
 </html>
