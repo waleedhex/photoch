@@ -1,19 +1,40 @@
-console.log('تم تحميل سكربت تحدي الصور بنجاح');
+console.log('تم تحميل سكربت index.html بنجاح');
 
 const ADMIN_CODE = 'wfra1403';
 
 let imageList = [];
+let solutionsList = []; // New: To store solutions
 let currentRoundIndex = 1;
 let team1Score = 0;
 let team2Score = 0;
 let timer;
-let timeLeft = 60;
+let timeLeft = 60; // Adjusted default time to 60
 let availableIndices = [];
 
 const gameImage = document.getElementById('game-image');
 const timerDisplay = document.getElementById('timer');
 const timeInput = document.getElementById('time-input');
-const solutionText = document.getElementById('solution-text');
+const hintButton = document.getElementById('hint-button'); // Now "Show Solution" button
+
+// New: Create a div for solution text
+const solutionTextDiv = document.createElement('div');
+solutionTextDiv.id = 'solution-text';
+solutionTextDiv.style.cssText = `
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 10px 15px;
+    border-radius: 8px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+    z-index: 10;
+    display: none; /* Hidden by default */
+`;
+document.querySelector('.image-container').appendChild(solutionTextDiv);
 
 // دالة للتحقق مما إذا كان المستخدم أوفلاين أو في وضع PWA
 function isOfflineOrPWA() {
@@ -50,13 +71,16 @@ async function verifyAccessCode() {
     isVerifying = true;
     verifyButton.disabled = true;
     verifyButton.textContent = 'جار التحقق...';
-    verifyingIndicator.style.display = 'block';
+    if (verifyingIndicator) {
+        verifyingIndicator.style.display = 'block';
+    }
 
     try {
         if (isOfflineOrPWA()) {
             console.log('أوفلاين أو في وضع PWA، تخطي التحقق...');
             document.getElementById('access-code-container').style.display = 'none';
-            document.getElementById('start-container').style.display = 'flex';
+            document.getElementById('game-container').style.display = 'flex';
+            await startGame();
             return;
         }
 
@@ -71,9 +95,10 @@ async function verifyAccessCode() {
         const validCodesLowerCase = data.validCodes.map(c => c.toLowerCase());
 
         if (validCodesLowerCase.includes(code.toLowerCase())) {
-            console.log('الرمز صالح، جارٍ عرض شاشة البداية...');
+            console.log('الرمز صالح، جارٍ تحميل صفحة اللعبة...');
             document.getElementById('access-code-container').style.display = 'none';
-            document.getElementById('start-container').style.display = 'flex';
+            document.getElementById('game-container').style.display = 'flex';
+            await startGame();
         } else {
             alert('رمز غير صالح! حاول مرة أخرى.');
         }
@@ -83,12 +108,15 @@ async function verifyAccessCode() {
     } finally {
         isVerifying = false;
         verifyButton.disabled = false;
-        verifyButton.textContent = 'تأكيد';
-        verifyingIndicator.style.display = 'none';
+        verifyButton.textContent = 'تحقق';
+        if (verifyingIndicator) {
+            verifyingIndicator.style.display = 'none';
+        }
     }
 }
 
 async function loadAnnouncements() {
+    // تحميل الإعلانات فقط إذا كان المستخدم أونلاين وليس في وضع PWA
     if (isOfflineOrPWA()) {
         console.log('أوفلاين أو في وضع PWA، تخطي تحميل الإعلانات...');
         return;
@@ -98,29 +126,31 @@ async function loadAnnouncements() {
         const response = await fetch('announcements.json');
         const data = await response.json();
         const announcementsContainer = document.getElementById('announcements-container');
-        announcementsContainer.innerHTML = '';
-        data.announcements.forEach(announcement => {
-            const announcementCard = document.createElement('div');
-            announcementCard.className = 'announcement-card';
-            if (announcement.title) {
-                const title = document.createElement('h3');
-                title.textContent = announcement.title;
-                announcementCard.appendChild(title);
-            }
-            if (announcement.text) {
-                const text = document.createElement('p');
-                text.textContent = announcement.text;
-                announcementCard.appendChild(text);
-            }
-            if (announcement.link && announcement.button) {
-                const button = document.createElement('button');
-                button.textContent = announcement.button;
-                button.onclick = () => window.open(announcement.link, '_blank');
-                announcementCard.appendChild(button);
-            }
-            announcementsContainer.appendChild(announcementCard);
-        });
-        console.log('تم تحميل announcements.json بنجاح');
+        if (announcementsContainer) { // Check if container exists (it's removed in index.html)
+            announcementsContainer.innerHTML = '';
+            data.announcements.forEach(announcement => {
+                const announcementCard = document.createElement('div');
+                announcementCard.className = 'announcement-card';
+                if (announcement.title) {
+                    const title = document.createElement('h3');
+                    title.textContent = announcement.title;
+                    announcementCard.appendChild(title);
+                }
+                if (announcement.text) {
+                    const text = document.createElement('p');
+                    text.textContent = announcement.text;
+                    announcementCard.appendChild(text);
+                }
+                if (announcement.link && announcement.button) {
+                    const button = document.createElement('button');
+                    button.textContent = announcement.button;
+                    button.onclick = () => window.open(announcement.link, '_blank');
+                    announcementCard.appendChild(button);
+                }
+                announcementsContainer.appendChild(announcementCard);
+            });
+            console.log('تم تحميل announcements.json بنجاح');
+        }
     } catch (error) {
         console.error('خطأ في تحميل announcements.json:', error);
     }
@@ -150,14 +180,18 @@ async function getImageAndAudio(index) {
     }
 
     const imageData = imageList[index - 1];
-    const imgBase = `assets/${imageData.name}`;
+    const imgBase = `assets/${imageData.name}`; // Assuming images are directly in 'assets' now
     const imagePaths = getImageUrl(imgBase);
     let pathIndex = 0;
     let img = imagePaths[pathIndex];
-    console.log('محاولة تحميل الصورة:', img);
+    
+    // Find the solution for the current image
+    const solutionData = solutionsList.find(s => s.image === imageData.name);
+    const solution = solutionData ? solutionData.solution : 'لا يوجد حل';
+
     return {
         img,
-        solution: imageData.solution || '',
+        solution,
         onError: (element) => {
             pathIndex++;
             if (pathIndex < imagePaths.length) {
@@ -173,7 +207,7 @@ async function getImageAndAudio(index) {
 
 function startTimer() {
     clearInterval(timer);
-    timeLeft = parseInt(timeInput.value) || 60;
+    timeLeft = parseInt(timeInput.value) || 60; // Default to 60 if input is empty
     updateTimerDisplay();
     timer = setInterval(() => {
         timeLeft--;
@@ -192,95 +226,111 @@ function updateTimerDisplay() {
     timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
 }
 
+// Renamed from playHint to showSolution
 function showSolution() {
-    if (solutionText.style.display === 'block') {
-        solutionText.style.display = 'none';
+    const imageData = imageList[currentRoundIndex - 1];
+    const solutionData = solutionsList.find(s => s.image === imageData.name);
+    if (solutionData && solutionData.solution) {
+        solutionTextDiv.textContent = solutionData.solution;
+        solutionTextDiv.style.display = 'block';
     } else {
-        solutionText.textContent = imageList[currentRoundIndex - 1].solution || 'لا يوجد حل';
-        solutionText.style.display = 'block';
+        solutionTextDiv.textContent = 'لا يوجد حل لهذه الصورة.';
+        solutionTextDiv.style.display = 'block';
     }
 }
 
 function addScore(team) {
+    const points = 1; // Always add 1 point
     if (team === 1) {
-        team1Score += 1;
+        team1Score += points;
         document.getElementById('team1-score').textContent = team1Score;
     } else {
-        team2Score += 1;
+        team2Score += points;
         document.getElementById('team2-score').textContent = team2Score;
     }
 }
 
 async function nextRound() {
-    solutionText.style.display = 'none';
+    clearInterval(timer); // Stop timer from previous round
+    solutionTextDiv.style.display = 'none'; // Hide solution for next round
+
     const nextIndex = getRandomImageIndex();
     if (!nextIndex) {
-        alert('لا توجد صور للعرض! العودة إلى شاشة البداية.');
-        returnToStart();
-        return;
+        alert('لا توجد صور للعرض! ستتم إعادة اللعب.');
+        // If no more images, reset availableIndices and start fresh
+        availableIndices = Array.from({ length: imageList.length }, (_, i) => i + 1);
+        const newFirstIndex = getRandomImageIndex();
+        if (!newFirstIndex) {
+             // This case should ideally not happen if imageList is populated
+            console.error('No images to start a new round even after resetting available indices.');
+            return;
+        }
+        currentRoundIndex = newFirstIndex;
+    } else {
+        currentRoundIndex = nextIndex;
     }
-    currentRoundIndex = nextIndex;
+
     const { img, solution, onError } = await getImageAndAudio(currentRoundIndex);
     gameImage.src = img;
     gameImage.onerror = () => onError(gameImage);
-    solutionText.textContent = solution;
-    startTimer();
+    
+    startTimer(); // Start timer automatically for the new round
 }
 
 async function startGame() {
+    // Load announcements (handled within loadAnnouncements)
     await loadAnnouncements();
-    imageList = [];
-    availableIndices = [];
 
     try {
+        // Load metadata.json
         const metadataResponse = await fetch('assets/metadata.json');
         const metadata = await metadataResponse.json();
-        const solutionsResponse = await fetch('assets/solutions.json');
-        const solutions = await solutionsResponse.json();
-
-        imageList = metadata.images.map(img => {
-            const solution = solutions.solutions.find(s => s.image === img.name);
-            return {
-                ...img,
-                solution: solution ? solution.solution : ''
-            };
-        });
+        imageList = metadata.images.map(img => ({
+            name: img.name // Assuming 'name' is the identifier for images
+        }));
         availableIndices = Array.from({ length: imageList.length }, (_, i) => i + 1);
-        console.log('تم تحميل metadata.json وsolutions.json بنجاح:', imageList);
-    } catch (error) {
-        console.error('خطأ في تحميل metadata.json أو solutions.json:', error);
-        alert('فشل تحميل بيانات الصور.');
-        return;
-    }
+        console.log('تم تحميل metadata.json بنجاح:', imageList);
 
-    if (imageList.length === 0) {
-        console.warn('لا توجد صور للعرض! العودة إلى شاشة البداية.');
-        returnToStart();
+        // Load solutions.json
+        const solutionsResponse = await fetch('assets/solutions.json');
+        solutionsList = await solutionsResponse.json();
+        console.log('تم تحميل solutions.json بنجاح:', solutionsList);
+
+    } catch (error) {
+        console.error('خطأ في تحميل بيانات اللعبة (metadata.json أو solutions.json):', error);
+        alert('فشل تحميل بيانات اللعبة. يرجى التأكد من توفر الملفات.');
         return;
     }
 
     document.getElementById('start-container').style.display = 'none';
     document.getElementById('game-container').style.display = 'flex';
+
     const firstIndex = getRandomImageIndex();
     if (!firstIndex) {
-        alert('لا توجد صور للعرض! العودة إلى شاشة البداية.');
-        returnToStart();
+        alert('لا توجد صور للعرض! يرجى التحقق من ملفات اللعبة.');
         return;
     }
     currentRoundIndex = firstIndex;
     const { img, solution, onError } = await getImageAndAudio(currentRoundIndex);
     gameImage.src = img;
     gameImage.onerror = () => onError(gameImage);
-    solutionText.textContent = solution;
-    startTimer();
+
+    startTimer(); // Start timer automatically for the first round
 }
 
-function returnToStart() {
+
+function returnToCategories() { // This function now returns to the start screen
     clearInterval(timer);
+    solutionTextDiv.style.display = 'none'; // Hide solution if visible
     document.getElementById('game-container').style.display = 'none';
-    document.getElementById('start-container').style.display = 'flex';
+    document.getElementById('start-container').style.display = 'flex'; // Show start screen
     imageList = [];
+    solutionsList = [];
     availableIndices = [];
+    team1Score = 0;
+    team2Score = 0;
+    document.getElementById('team1-score').textContent = team1Score;
+    document.getElementById('team2-score').textContent = team2Score;
     timeLeft = parseInt(timeInput.value) || 60;
     updateTimerDisplay();
 }
@@ -290,12 +340,14 @@ let deferredPrompt;
 function showInstallPrompt() {
     const installButton = document.getElementById('install-button');
 
+    // إظهار الزر فقط إذا كان المستخدم أونلاين وليس في وضع PWA
     if (!isOfflineOrPWA()) {
         installButton.style.display = 'block';
     } else {
         installButton.style.display = 'none';
     }
 
+    // التقاط حدث التثبيت
     window.addEventListener('beforeinstallprompt', (e) => {
         e.preventDefault();
         deferredPrompt = e;
@@ -323,17 +375,21 @@ function showInstallPrompt() {
 }
 
 timeInput.addEventListener('change', () => {
-    clearInterval(timer);
-    timeLeft = parseInt(timeInput.value) || 60;
+    clearInterval(timer); // إيقاف العداد عند تغيير الوقت
+    timeLeft = parseInt(timeInput.value) || 60; // Default to 60 if input is empty
     updateTimerDisplay();
 });
 
+// ربط الأزرار وتحميل الإعلانات عند بدء الصفحة
 document.addEventListener('DOMContentLoaded', () => {
+    // تحميل الإعلانات (سيتم التحكم في هذا في loadAnnouncements)
     loadAnnouncements();
     console.log('جارٍ تحميل الإعلانات عند بدء الصفحة');
 
+    // إظهار زر التثبيت
     showInstallPrompt();
 
+    // ربط زر بدء العداد
     const startTimerButton = document.getElementById('start-timer-button');
     if (startTimerButton) {
         startTimerButton.addEventListener('click', startTimer);
@@ -342,29 +398,33 @@ document.addEventListener('DOMContentLoaded', () => {
         console.error('لم يتم العثور على زر بدء العداد!');
     }
 
+    // ربط زر "بداية"
     const startGameButton = document.getElementById('start-game');
     if (startGameButton) {
-        startGameButton.addEventListener('click', startGame);
-        console.log('تم ربط زر بداية بنجاح');
+        startGameButton.addEventListener('click', () => {
+            document.getElementById('start-container').style.display = 'none';
+            document.getElementById('game-container').style.display = 'flex';
+            startGame();
+        });
+        console.log('تم ربط زر "بداية" بنجاح');
     } else {
-        console.error('لم يتم العثور على زر بداية!');
+        console.error('لم يتم العثور على زر "بداية"!');
     }
 
-    const verifyButton = document.getElementById('verify-button');
-    if (verifyButton) {
-        verifyButton.addEventListener('click', verifyAccessCode);
-        console.log('تم ربط زر التحقق من رمز الوصول بنجاح');
-    } else {
-        console.error('لم يتم العثور على زر التحقق من رمز الوصول!');
-    }
+    // ربط زر التحقق من رمز الوصول (if it still exists in HTML, though it's removed in current instructions)
+    // The previous instruction had `#access-code-container` and its elements removed.
+    // Assuming it's no longer present for the main game flow based on `index.html` changes.
+    // If you intend to re-introduce it for admin, that would be a separate step.
 
-    const hintButton = document.getElementById('hint-button');
-    if (hintButton) {
-        hintButton.addEventListener('click', showSolution);
-        console.log('تم ربط زر إظهار الحل بنجاح');
-    } else {
-        console.error('لم يتم العثور على زر إظهار الحل!');
-    }
+    // No longer need to verify access code for main game start directly.
+    // The entry point is now the "بداية" button or PWA offline mode.
+
+    // Initially hide game container and show start container
+    document.getElementById('game-container').style.display = 'none';
+    document.getElementById('start-container').style.display = 'flex';
+
+    // Set initial timer display based on default value
+    updateTimerDisplay();
 });
 
 document.addEventListener('contextmenu', event => event.preventDefault());
