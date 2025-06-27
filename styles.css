@@ -552,7 +552,7 @@ footer {
         margin: 0;
         padding: 0;
         /* التعديل الرئيسي: تحديد أقصى ارتفاع لحاوية الصورة */
-        max-height: calc(100vh - 100px); /* قيمة تقديرية لارتفاع الهيدر والفوتر والهوامش العلوية/السفلية */
+        max-height: calc(100vh - 200px); /* قيمة تقديرية لارتفاع الهيدر والفوتر والهوامش العلوية/السفلية */
         height: auto; /* السماح للارتفاع بالتكيف مع نسبة الأبعاد والـ max-height */
     }
     .score-section {
@@ -583,7 +583,7 @@ footer {
         flex-grow: 1;
         overflow-y: auto;
         /* التعديل الرئيسي: تحديد أقصى ارتفاع للوحة التحكم ليتناسب مع الصورة */
-        max-height: calc(100vh - 100px); /* يجب أن تتطابق مع max-height لـ image-container */
+        max-height: calc(100vh - 200px); /* يجب أن تتطابق مع max-height لـ image-container */
         min-height: unset; /* إزالة الارتفاع الأدنى الثابت */
         height: unset; /* إزالة الارتفاع الثابت */
         -webkit-overflow-scrolling: touch;
