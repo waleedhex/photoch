@@ -3,8 +3,8 @@ body {
     background: linear-gradient(135deg, #F5F5DC, #E6D7B9);
     background-attachment: fixed;
     margin: 0;
-    /* التعديل: تغيير min-height ليتكيف مع المحتوى */
-    min-height: auto; /* تم التعديل */
+    /* التعديل: استخدام fit-content بدلاً من auto */
+    min-height: fit-content; /* تم التعديل */
     width: 100vw;
     position: relative;
     display: flex;
@@ -52,8 +52,8 @@ body {
     flex-direction: column;
     align-items: center;
     transition: height 0.3s ease;
-    /* التعديل: تغيير min-height ليتكيف مع المحتوى */
-    min-height: auto; /* تم التعديل */
+    /* التعديل: استخدام fit-content بدلاً من auto */
+    min-height: fit-content; /* تم التعديل */
     /* التأكد من عدم وجود padding-bottom أو margin-bottom كبير */
     padding-bottom: 0;
     margin-bottom: 0;
@@ -116,8 +116,8 @@ body {
 
 #game-container {
     overflow-y: hidden;
-    /* التأكد من إزالة min-height: 100vh; هنا أو تغييرها */
-    min-height: auto; /* تم التعديل */
+    /* التعديل: استخدام fit-content بدلاً من auto */
+    min-height: fit-content; /* تم التعديل */
 }
 
 .header-section {
@@ -147,8 +147,8 @@ h1 {
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    /* يمكن تغيير max-height إلى auto للسماح بتمدد المحتوى */
-    max-height: auto; /* تم التعديل من calc(100vh - 60px) */
+    /* التعديل: استخدام fit-content بدلاً من auto */
+    max-height: fit-content; /* تم التعديل من calc(100vh - 60px) */
     overflow: hidden;
     transition: flex-direction 0.3s ease;
 }
@@ -211,8 +211,8 @@ h1 {
     border: none;
     background: transparent;
     margin: 3px 0;
-    /* يمكن تغيير max-height إلى auto ليتكيف مع الصورة */
-    max-height: auto; /* تم التعديل من 50vh */
+    /* التعديل: استخدام fit-content بدلاً من auto */
+    max-height: fit-content; /* تم التعديل من 50vh */
 }
 
 #game-image {
@@ -308,9 +308,9 @@ h1 {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    /* التعديل: السماح للحاوية بالتكيف مع حجم المحتوى */
+    /* التعديل: استخدام fit-content */
     height: fit-content; /* تم الإضافة */
-    min-height: auto; /* لضمان عدم وجود ارتفاع أدنى ثابت */
+    min-height: fit-content; /* لضمان عدم وجود ارتفاع أدنى ثابت */
 }
 
 .bottom-container .timer-container {
@@ -485,13 +485,14 @@ footer {
         font-size: 0.8rem;
     }
     #solution-text {
-        font-size: 1rem;
-        padding: 8px;
+        font-size: 0.9rem;
+        padding: 6px;
     }
     /* التأكد من ضبط الـ bottom-container هنا أيضاً */
     .bottom-container {
         margin-bottom: 0; /* تم التعديل */
         padding-bottom: 5px; /* يمكن تعديله حسب الحاجة */
+        min-height: fit-content; /* تم التعديل */
     }
 }
 
@@ -499,7 +500,7 @@ footer {
     body {
         display: flex;
         flex-direction: column;
-        min-height: 100vh;
+        min-height: 100vh; /* يمكن الإبقاء عليها هنا إذا أردت الصفحة تملأ الشاشة في هذه الوضعية */
         margin: 0;
     }
     #start-container {
@@ -510,8 +511,8 @@ footer {
     }
     #game-container {
         width: 100vw;
-        /* يمكن تغيير min-height إلى auto ليتكيف مع المحتوى */
-        min-height: auto; /* تم التعديل */
+        /* التعديل: استخدام fit-content بدلاً من auto */
+        min-height: fit-content; /* تم التعديل */
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
@@ -535,8 +536,8 @@ footer {
     }
     .main-content {
         width: 100%;
-        /* التعديل: تغيير height إلى auto أو flex-grow للسماح للمحتوى بتحديد الارتفاع */
-        height: auto; /* تم التعديل من calc(100vh - 80px) */
+        /* التعديل: استخدام fit-content بدلاً من auto */
+        height: fit-content; /* تم التعديل من calc(100vh - 80px) */
         flex-grow: 1; /* تأكد من وجوده ليمتد على المساحة المتاحة */
         display: flex;
         flex-direction: row;
@@ -553,8 +554,8 @@ footer {
         justify-content: flex-start;
         padding: 0;
         margin: 0;
-        /* التعديل: تغيير height إلى auto للسماح بالمرونة */
-        height: auto; /* تم التعديل من 100% */
+        /* التعديل: استخدام fit-content بدلاً من auto */
+        height: fit-content; /* تم التعديل من 100% */
         box-sizing: border-box;
         overflow: hidden;
     }
@@ -566,9 +567,9 @@ footer {
     .image-container {
         width: calc(100% - 5px);
         margin-right: 5px;
-        /* التعديل: تغيير height إلى auto للسماح بالمرونة */
-        height: auto; /* تم التعديل من calc(100% - 60px) */
-        max-height: auto; /* تم التعديل من calc(100% - 60px) */
+        /* التعديل: استخدام fit-content بدلاً من auto */
+        height: fit-content; /* تم التعديل من calc(100% - 60px) */
+        max-height: fit-content; /* تم التعديل من calc(100% - 60px) */
         aspect-ratio: 16 / 9;
         margin: 0;
         padding: 0;
@@ -581,17 +582,17 @@ footer {
         justify-content: flex-start;
         padding: 0;
         margin: 0;
-        /* التعديل: تغيير height إلى auto للسماح بالمرونة */
-        height: auto; /* تم التعديل من 100% */
+        /* التعديل: استخدام fit-content بدلاً من auto */
+        height: fit-content; /* تم التعديل من 100% */
         box-sizing: border-box;
         overflow: hidden;
     }
     .bottom-container {
         width: calc(100% - 10px);
         max-width: 200px;
-        /* التعديل: تغيير min-height و max-height إلى auto */
-        min-height: auto; /* تم التعديل من calc(100% - 60px) */
-        max-height: auto; /* تم التعديل من calc(100% - 60px) */
+        /* التعديل: استخدام fit-content */
+        min-height: fit-content; /* تم التعديل من calc(100% - 60px) */
+        max-height: fit-content; /* تم التعديل من calc(100% - 60px) */
         height: fit-content; /* ليتكيف مع المحتوى */
         padding: 5px;
         margin: 0;
