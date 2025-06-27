@@ -67,14 +67,15 @@ body {
     gap: 10px;
 }
 
+/* تعديل تنسيقات حاوية الإعلانات */
 #announcements-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 10px;
-    margin-top: 20px;
+    margin: 10px auto; /* تم التعديل */
     width: 90%;
-    max-width: 400px;
+    max-width: 300px; /* تم التعديل */
 }
 
 #access-code {
@@ -229,17 +230,21 @@ h1 {
     z-index: 10;
 }
 
+/* تعديل تنسيقات زر "إظهار الحل" */
 #hint-button {
     background: #6B7280;
     color: #FFFFFF;
-    padding: 8px 16px;
+    padding: 6px 12px; /* تم التعديل */
     border: none;
     border-radius: 10px;
     cursor: pointer;
-    font-size: 0.9rem;
-    margin: 5px;
+    font-size: 0.8rem; /* تم التعديل */
+    margin: 5px auto; /* لتوسيط الزر */
     transition: background 0.3s ease, transform 0.3s ease;
-    max-width: 160px;
+    max-width: 140px; /* تم التعديل */
+    width: 100%; /* تم الإضافة */
+    text-align: center; /* لضمان توسيط النص */
+    box-sizing: border-box; /* لضمان التوافق مع العرض */
 }
 
 #hint-button:hover {
@@ -431,9 +436,15 @@ footer {
     .team p {
         font-size: 1.1rem;
     }
+    /* تنسيقات زر "إظهار الحل" في الشاشات الصغيرة */
     #hint-button, .score-button, .next-round, .return-button {
         padding: 5px 10px;
         font-size: 0.8rem;
+    }
+    /* تنسيقات حاوية الإعلانات في الشاشات الصغيرة */
+    #announcements-container {
+        max-width: 300px;
+        margin: 10px auto;
     }
     .sticker-top-left, .sticker-bottom-right {
         width: 60px;

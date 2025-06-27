@@ -15,6 +15,8 @@
         <h1>تحدي الصور</h1>
         <input type="text" id="access-code" placeholder="أدخل رمز الوصول">
         <button id="verify-button">تأكيد</button>
+        <!-- تم نقل حاوية الإعلانات هنا -->
+        <div id="announcements-container"></div>
         <span id="verifying-indicator" style="display: none;">🔄 جار التحقق...</span>
     </div>
 
@@ -35,7 +37,7 @@
                     <div id="solution-text"></div>
                     <img id="game-image" src="assets/default_category.webp" alt="صورة اللعبة">
                 </div>
-                <button id="hint-button">إظهار الحل</button>
+                <!-- زر "إظهار الحل" لم يعد هنا، تم نقله إلى bottom-container -->
             </div>
             <div class="score-section">
                 <div class="bottom-container">
@@ -44,6 +46,8 @@
                         <input type="number" id="time-input" value="60">
                         <button id="start-timer-button">بدء العداد</button>
                     </div>
+                    <!-- تم نقل زر "إظهار الحل" إلى هنا -->
+                    <button id="hint-button">إظهار الحل</button>
                     <div class="score-container">
                         <div class="team">
                             <h2>الفريق الأول</h2>
@@ -65,7 +69,6 @@
         </div>
     </div>
 
-    <div id="announcements-container"></div>
     <footer>© 2025 تحدي الصور - جميع الحقوق محفوظة</footer>
 </body>
 </html>
