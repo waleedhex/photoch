@@ -1,13 +1,14 @@
 body {
     font-family: 'Tajawal', sans-serif;
-    background: linear-gradient(135deg, #ff8787, #5ee4db); /* استوحيت من ملفك الجديد */
+    /* ذوق جديد للألوان: تدرج دافئ ومريح */
+    background: linear-gradient(135deg, #FFDAB9, #FFA07A); /* PeachPuff to LightSalmon */
     margin: 0;
     min-height: 100vh;
     width: 100vw;
     position: relative;
     display: flex;
     flex-direction: column;
-    overflow: hidden; /* تم التعديل: إخفاء التمرير لمنع "اللعب" كما في ملفك الجديد */
+    overflow: hidden; /* تم الإبقاء على إخفاء التمرير لمنع "اللعب" */
     box-sizing: border-box;
     transition: all 0.3s ease;
 }
@@ -15,6 +16,7 @@ body {
 .sticker {
     position: absolute;
     z-index: 50;
+    opacity: 0.8; /* أضفت بعض الشفافية للملصقات */
 }
 
 .sticker-top-left {
@@ -35,11 +37,10 @@ body {
     background-size: contain;
 }
 
-/* تم توحيد هذا الجزء ليتماشى مع فلسفة min-height: 100vh كما في ملفك الجديد */
-#access-code-container, #start-container, #game-container { /* أعدت #start-container لأنها كانت موجودة في المحادثة السابقة */
+#access-code-container, #start-container, #game-container {
     width: 100%;
     max-width: 100vw;
-    min-height: 100vh; /* تم التعديل: لجعلها تمتد لملء الشاشة دائماً */
+    min-height: 100vh;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -52,7 +53,7 @@ body {
 
 #access-code-container {
     justify-content: center;
-    color: white; /* استوحيت من ملفك الجديد */
+    color: #4A3C30; /* لون نص جديد */
     text-align: center;
     z-index: 100;
 }
@@ -67,22 +68,21 @@ body {
     max-width: 400px;
 }
 
-/* إضافة أنماط #categories-container من ملفك الجديد إذا كانت ذات صلة بمشروعك */
 #categories-container {
     justify-content: flex-start;
     overflow: hidden;
-    color: white;
+    color: #4A3C30; /* لون نص جديد */
     text-align: center;
     align-items: center;
 }
 
-.categories-header { /* أنماط الهيدر المثبت من ملفك الجديد */
+.categories-header {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     max-width: 100%;
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 248, 220, 0.5); /* خلفية شفافة فاتحة */
     backdrop-filter: blur(5px);
     z-index: 200;
     display: flex;
@@ -96,7 +96,7 @@ body {
     margin: 10px 0;
     font-size: 1.4rem;
     font-weight: bold;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); /* ظل نص أخف */
 }
 
 #access-code {
@@ -108,35 +108,56 @@ body {
     z-index: 110;
 }
 
-#access-code-container button, #random-start, #start-game { /* أضفت #start-game هنا */
-    padding: 10px 20px;
-    font-size: 1rem;
-    background: #28a745; /* استوحيت من ملفك الجديد */
+/* زر البداية: كبير ووسط الشاشة */
+#access-code-container button, #random-start, #start-game {
+    padding: 15px 30px; /* حجم أكبر */
+    font-size: 1.5rem; /* خط أكبر */
+    background: #8B4513; /* SaddleBrown */
     color: white;
     border: none;
-    border-radius: 8px; /* استوحيت من ملفك الجديد */
+    border-radius: 8px;
+    cursor: pointer;
+    margin: 10px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, background 0.3s ease;
+    z-index: 120;
+    pointer-events: auto;
+    width: auto;
+    max-width: 280px; /* التحكم في العرض الأقصى */
+}
+
+#random-start {
+    background: #A0522D; /* Sienna - لون مختلف قليلاً لزر البداية العشوائية */
+}
+
+#access-code-container button:hover, #random-start:hover, #start-game:hover {
+    transform: scale(1.05);
+    background: #A0522D; /* Sienna */
+}
+
+/* زر "حفظ كتطبيق" (Install button): أصغر و أسفل زر البداية */
+.install-prompt {
+    padding: 10px 20px; /* أصغر من زر البداية */
+    font-size: 0.9rem; /* خط أصغر */
+    background: #CD853F; /* Peru - لون مختلف */
+    color: white;
+    border: none;
+    border-radius: 8px;
     cursor: pointer;
     margin: 10px;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
     transition: transform 0.3s ease, background 0.3s ease;
     z-index: 120;
     pointer-events: auto;
+    width: auto;
+    max-width: 180px; /* أصغر من زر البداية */
 }
 
-#random-start {
-    background: #007bff; /* استوحيت من ملفك الجديد */
-}
-
-#access-code-container button:hover, #random-start:hover, #start-game:hover {
+.install-prompt:hover {
     transform: scale(1.05);
-    background: #218838; /* استوحيت من ملفك الجديد */
+    background: #D2691E; /* Chocolate */
 }
 
-#random-start:hover {
-    background: #0056b3; /* استوحيت من ملفك الجديد */
-}
-
-/* أنماط #categories-grid من ملفك الجديد إذا كانت ذات صلة بمشروعك */
 #categories-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -145,11 +166,11 @@ body {
     padding-bottom: 50px;
     width: 100%;
     max-width: 100%;
-    margin-top: 120px; /* يعتمد على ارتفاع الهيدر الثابت */
+    margin-top: 120px;
     margin-bottom: 20px;
     overflow-y: auto;
     height: auto;
-    max-height: calc(100vh - 220px); /* يعتمد على الهيدر والفوتر الثابتين */
+    max-height: calc(100vh - 220px);
     box-sizing: border-box;
     scroll-padding-bottom: 50px;
     scroll-behavior: smooth;
@@ -157,7 +178,7 @@ body {
 }
 
 .category-card {
-    background: white;
+    background: #FFFACD; /* LemonChiffon */
     border-radius: 8px;
     padding: 6px;
     box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
@@ -182,31 +203,11 @@ body {
 .category-card p {
     margin: 6px 0 0;
     font-size: 0.85rem;
-    color: #1a1a1a;
-}
-
-.install-prompt { /* أنماط زر التثبيت من ملفك الجديد */
-    padding: 10px 40px;
-    font-size: 1rem;
-    background: #f39c12;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    margin: 10px;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease, background 0.3s ease;
-    z-index: 120;
-    pointer-events: auto;
-}
-
-.install-prompt:hover {
-    transform: scale(1.05);
-    background: #e08e0b;
+    color: #4A3C30; /* لون نص جديد */
 }
 
 #game-container {
-    overflow-y: hidden; /* تم التعديل: كما في ملفك الجديد */
+    overflow-y: hidden;
 }
 
 .header-section {
@@ -216,15 +217,15 @@ body {
 }
 
 h1 {
-    color: #fff; /* استوحيت من ملفك الجديد */
+    color: #4A3C30; /* لون نص جديد */
     font-size: 1.5rem;
     margin: 3px 0;
     font-weight: 700;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* استوحيت من ملفك الجديد */
+    text-shadow: none; /* تمت إزالة ظل النص هنا */
 }
 
 .instructions {
-    color: white; /* استوحيت من ملفك الجديد */
+    color: #4A3C30; /* لون نص جديد */
     font-size: 0.9rem;
     margin: 3px 0;
     line-height: 1.2;
@@ -232,11 +233,10 @@ h1 {
 
 .main-content {
     width: 100%;
-    flex-grow: 1; /* لا تزال ضرورية لملء المساحة المتاحة في #game-container */
+    flex-grow: 1;
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    /* تمت إزالة max-height: calc(100vh - 60px); هنا، سيتم ضبطها في اللاندسكيب */
     overflow: hidden;
     transition: flex-direction 0.3s ease;
 }
@@ -253,15 +253,15 @@ h1 {
 
 #timer {
     font-size: 1.6rem;
-    color: #fff; /* استوحيت من ملفك الجديد */
+    color: #8B4513; /* لون جديد */
     font-weight: bold;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 #time-input {
     padding: 5px;
     font-size: 0.8rem;
-    border: 2px solid #007bff; /* استوحيت من ملفك الجديد */
+    border: 2px solid #8B4513; /* لون جديد */
     border-radius: 5px;
     width: 50px;
 }
@@ -269,10 +269,10 @@ h1 {
 #start-timer-button {
     padding: 8px 16px;
     font-size: 0.9rem;
-    background: #28a745; /* استوحيت من ملفك الجديد */
+    background: #3CB371; /* MediumSeaGreen */
     color: white;
     border: none;
-    border-radius: 8px; /* استوحيت من ملفك الجديد */
+    border-radius: 8px;
     cursor: pointer;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
     transition: transform 0.3s ease, background 0.3s ease;
@@ -280,7 +280,7 @@ h1 {
 
 #start-timer-button:hover {
     transform: scale(1.05);
-    background: #218838; /* استوحيت من ملفك الجديد */
+    background: #2E8B57; /* SeaGreen */
 }
 
 .image-section {
@@ -299,7 +299,7 @@ h1 {
     border: none;
     background: transparent;
     margin: 3px 0;
-    max-height: 50vh; /* تم الإبقاء عليها كما هي للوضع الافتراضي */
+    max-height: 50vh;
 }
 
 #game-image {
@@ -311,32 +311,54 @@ h1 {
     left: 0;
 }
 
-#image-owner { /* أضفتها من ملفك الجديد */
+#image-owner {
     position: absolute;
     top: 5px;
     right: 10px;
-    background: rgba(0, 0, 0, 0.8);
+    background: rgba(74, 60, 48, 0.8); /* لون جديد */
     color: white;
     padding: 3px 8px;
     font-size: 20px;
     border-radius: 3px;
 }
 
+/* نص الحل: كبير وفي الجزء العلوي من الصورة */
+#solution-text {
+    display: none;
+    position: absolute;
+    top: 15%; /* تم التعديل: في الجزء العلوي */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(74, 60, 48, 0.7); /* لون خلفية جديد */
+    color: white; /* لون نص جديد */
+    padding: 15px; /* حجم أكبر */
+    font-size: 2rem; /* تم التعديل: خط أكبر */
+    font-weight: bold;
+    border: 2px solid #FFD700; /* Gold border */
+    border-radius: 8px;
+    text-align: center;
+    z-index: 10;
+}
+
+/* زر إظهار الحل: في المنتصف (أفقيًا) */
 #hint-button {
-    background: #f39c12; /* استوحيت من ملفك الجديد */
-    color: white;
+    background: #FFD700; /* Gold */
+    color: #4A3C30; /* لون نص جديد */
     padding: 8px 16px;
     border: none;
-    border-radius: 8px; /* استوحيت من ملفك الجديد */
+    border-radius: 8px;
     cursor: pointer;
     font-size: 0.9rem;
-    margin: 5px;
+    margin: 5px auto; /* تم التعديل: في المنتصف أفقيًا */
     transition: transform 0.3s ease, opacity 0.3s ease;
     max-width: 160px;
+    width: 100%; /* للتأكد من توسيط الـ max-width */
+    box-sizing: border-box;
 }
 
 #hint-button:hover:not(.disabled) {
     transform: scale(1.05);
+    background: #DAA520; /* Goldenrod */
     opacity: 0.9;
 }
 
@@ -358,11 +380,11 @@ h1 {
 }
 
 .next-round, .return-button {
-    background: #dc3545; /* استوحيت من ملفك الجديد */
+    background: #CD5C5C; /* IndianRed */
     color: white;
     padding: 8px 16px;
     border: none;
-    border-radius: 8px; /* استوحيت من ملفك الجديد */
+    border-radius: 8px;
     cursor: pointer;
     font-size: 0.9rem;
     transition: transform 0.3s ease, opacity 0.3s ease;
@@ -374,10 +396,11 @@ h1 {
 .next-round:hover, .return-button:hover {
     transform: scale(1.05);
     opacity: 0.9;
+    background: #B22222; /* Firebrick */
 }
 
 .bottom-container {
-    background: white; /* استوحيت من ملفك الجديد */
+    background: #FFF8DC; /* Cornsilk */
     border-radius: 10px;
     padding: 10px;
     width: 90%;
@@ -385,7 +408,7 @@ h1 {
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
     margin: 3px auto;
     box-sizing: border-box;
-    overflow: hidden; /* تم الإبقاء عليها للوضع الافتراضي */
+    overflow: hidden;
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -403,14 +426,14 @@ h1 {
 
 .bottom-container #timer {
     font-size: 1.4rem;
-    color: #333; /* استوحيت من ملفك الجديد */
+    color: #4A3C30; /* لون نص جديد */
     text-shadow: none;
 }
 
 .bottom-container #time-input {
     padding: 5px;
     font-size: 0.8rem;
-    border: 2px solid #007bff; /* استوحيت من ملفك الجديد */
+    border: 2px solid #8B4513; /* لون جديد */
     border-radius: 5px;
     width: 50px;
 }
@@ -422,8 +445,8 @@ h1 {
 }
 
 .team {
-    background: #0069d9; /* استوحيت من ملفك الجديد */
-    color: white;
+    background: #87CEEB; /* SkyBlue */
+    color: #4A3C30; /* لون نص جديد */
     padding: 5px;
     border-radius: 8px;
     width: calc(50% - 6px);
@@ -443,11 +466,11 @@ h1 {
 }
 
 .score-button {
-    background: #28a745; /* استوحيت من ملفك الجديد */
+    background: #3CB371; /* MediumSeaGreen */
     color: white;
     padding: 5px 10px;
     border: none;
-    border-radius: 8px; /* استوحيت من ملفك الجديد */
+    border-radius: 8px;
     cursor: pointer;
     font-size: 0.9rem;
     transition: transform 0.3s ease, background 0.3s ease;
@@ -456,26 +479,25 @@ h1 {
 
 .score-button:hover {
     transform: scale(1.05);
-    background: #218838; /* استوحيت من ملفك الجديد */
+    background: #2E8B57; /* SeaGreen */
 }
 
 footer {
-    position: fixed; /* تم التعديل: تثبيت الفوتر كما في ملفك الجديد */
+    position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;
-    background: rgba(255, 255, 255, 0.1); /* استوحيت من ملفك الجديد */
-    backdrop-filter: blur(5px); /* استوحيت من ملفك الجديد */
-    color: white; /* استوحيت من ملفك الجديد */
+    background: rgba(255, 248, 220, 0.5); /* خلفية شفافة فاتحة */
+    backdrop-filter: blur(5px);
+    color: #4A3C30; /* لون نص جديد */
     text-align: center;
     font-size: 0.8rem;
     padding: 10px 0;
     z-index: 200;
-    /* تمت إزالة margin-top: auto; */
 }
 
 .announcement-card {
-    background: white; /* استوحيت من ملفك الجديد */
+    background: #FFFACD; /* LemonChiffon */
     border-radius: 10px;
     padding: 8px;
     margin: 3px;
@@ -488,17 +510,17 @@ footer {
 .announcement-card h3 {
     margin: 0 0 6px;
     font-size: 0.9rem;
-    color: #333; /* استوحيت من ملفك الجديد */
+    color: #4A3C30; /* لون نص جديد */
 }
 
 .announcement-card p {
     margin: 0 0 6px;
     font-size: 0.8rem;
-    color: #666; /* استوحيت من ملفك الجديد */
+    color: #666;
 }
 
 .announcement-card button {
-    background: #000; /* استوحيت من ملفك الجديد */
+    background: #8B4513; /* SaddleBrown */
     color: white;
     padding: 5px 10px;
     border: none;
@@ -518,10 +540,10 @@ footer {
         gap: 5px;
         padding: 3px;
         padding-bottom: 40px;
-        margin-top: 100px; /* يعتمد على ارتفاع الهيدر */
-        margin-bottom: 60px; /* يعتمد على ارتفاع الفوتر */
+        margin-top: 100px;
+        margin-bottom: 60px;
         height: auto;
-        max-height: calc(100vh - 180px); /* يعتمد على الهيدر والفوتر الثابتين */
+        max-height: calc(100vh - 180px);
         scroll-padding-bottom: 40px;
         scroll-behavior: smooth;
         -webkit-overflow-scrolling: touch;
@@ -539,15 +561,14 @@ footer {
     .category-card p {
         font-size: 0.7rem;
     }
-    #random-start {
-        padding: 8px 16px;
-        font-size: 0.9rem;
-        margin: 3px;
+    /* تعديلات حجم زر البداية وزر التثبيت في الشاشات الصغيرة */
+    #access-code-container button, #random-start, #start-game {
+        padding: 12px 25px;
+        font-size: 1.2rem;
     }
     .install-prompt {
-        padding: 8px 32px;
-        font-size: 0.9rem;
-        margin: 3px;
+        padding: 8px 16px;
+        font-size: 0.8rem;
     }
     #categories-container h2 {
         font-size: 1.3rem;
@@ -584,7 +605,6 @@ footer {
     footer {
         font-size: 0.7rem;
         padding: 8px 0;
-        /* تم إزالة margin-bottom: 0; لأنه fixed */
     }
     .bottom-container .timer-container {
         padding: 2px;
@@ -595,6 +615,11 @@ footer {
     #start-timer-button {
         padding: 5px 10px;
         font-size: 0.7rem;
+    }
+    /* نص الحل في الشاشات الصغيرة */
+    #solution-text {
+        font-size: 1.5rem;
+        padding: 10px;
     }
 }
 
@@ -617,17 +642,17 @@ footer {
         padding: 10px;
         padding-bottom: 50px;
         gap: 10px;
-        margin-top: 120px; /* يعتمد على ارتفاع الهيدر الثابت */
-        margin-bottom: 80px; /* يعتمد على ارتفاع الفوتر الثابت */
+        margin-top: 120px;
+        margin-bottom: 80px;
         height: auto;
-        max-height: calc(100vh - 220px); /* يعتمد على الهيدر والفوتر الثابتين */
+        max-height: calc(100vh - 220px);
         scroll-padding-bottom: 50px;
         scroll-behavior: smooth;
         -webkit-overflow-scrolling: touch;
     }
     #game-container {
         width: 100vw;
-        min-height: 100vh; /* تم التعديل: كما في ملفك الجديد */
+        min-height: 100vh;
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
@@ -635,7 +660,7 @@ footer {
         padding: 0;
         margin: 0;
         box-sizing: border-box;
-        overflow: hidden; /* تم التعديل: كما في ملفك الجديد */
+        overflow: hidden;
     }
     .header-section {
         width: 100%;
@@ -651,13 +676,13 @@ footer {
     }
     .main-content {
         width: 100%;
-        height: calc(100vh - 80px); /* تم التعديل: استناداً إلى الهيدر والفوتر المثبتين */
+        height: calc(100vh - 80px);
         display: flex;
         flex-direction: row;
         justify-content: stretch;
         align-items: stretch;
         gap: 10px;
-        overflow: hidden; /* تم التعديل: كما في ملفك الجديد */
+        overflow: hidden;
     }
     .image-section {
         flex: 0 0 70%;
@@ -667,7 +692,7 @@ footer {
         justify-content: flex-start;
         padding: 0;
         margin: 0;
-        height: 100%; /* لملء ارتفاع main-content */
+        height: 100%;
         box-sizing: border-box;
         overflow: hidden;
     }
@@ -679,8 +704,8 @@ footer {
     .image-container {
         width: calc(100% - 5px);
         margin-right: 5px;
-        height: calc(100% - 60px); /* تم التعديل: لضبط الارتفاع ضمن image-section */
-        max-height: calc(100% - 60px); /* تم التعديل: لضبط الارتفاع ضمن image-section */
+        height: calc(100% - 60px);
+        max-height: calc(100% - 60px);
         aspect-ratio: 16 / 9;
         margin: 0;
         padding: 0;
@@ -693,15 +718,15 @@ footer {
         justify-content: flex-start;
         padding: 0;
         margin: 0;
-        height: 100%; /* لملء ارتفاع main-content */
+        height: 100%;
         box-sizing: border-box;
         overflow: hidden;
     }
     .bottom-container {
         width: calc(100% - 10px);
         max-width: 200px;
-        min-height: calc(100% - 60px); /* تم التعديل: لضبط الارتفاع ضمن score-section */
-        max-height: calc(100% - 60px); /* تم التعديل: لضبط الارتفاع ضمن score-section */
+        min-height: calc(100% - 60px);
+        max-height: calc(100% - 60px);
         padding: 5px;
         margin: 0;
         margin-left: 10px;
@@ -712,7 +737,7 @@ footer {
         box-sizing: border-box;
         border-radius: 10px;
         box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-        overflow-y: auto; /* تم الإبقاء عليها للسماح بالتمرير داخل لوحة التحكم */
+        overflow-y: auto;
         -webkit-overflow-scrolling: touch;
     }
     .bottom-container .timer-container {
@@ -750,7 +775,7 @@ footer {
         margin-top: 5px;
         flex-grow: 0;
     }
-    .next-round, .return-button, #hint-button { /* تم التعديل: أضفت #hint-button هنا */
+    .next-round, .return-button, #hint-button {
         max-width: 140px;
         padding: 6px 12px;
         font-size: 0.8rem;
