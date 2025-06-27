@@ -494,9 +494,8 @@ footer {
     }
     #game-container {
         width: 100vw;
-        /* التعديل: للسماح للحاوية بالنمو لملء المساحة العمودية */
-        flex-grow: 1; /* تم التعديل */
-        min-height: fit-content; /* يمكن الإبقاء عليها أو إزالتها والاعتماد على flex-grow */
+        flex-grow: 1;
+        min-height: fit-content;
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
@@ -520,13 +519,12 @@ footer {
     }
     .main-content {
         width: 100%;
-        /* التعديل: لجعلها تأخذ الارتفاع الكامل المتاح داخل game-container */
-        height: 100%; /* تم التعديل */
+        height: 100%;
         flex-grow: 1;
         display: flex;
         flex-direction: row;
         justify-content: stretch;
-        align-items: stretch;
+        align-items: stretch; /* تم الإبقاء عليه لملء الارتفاع المتاح */
         gap: 10px;
         overflow: hidden;
     }
@@ -534,12 +532,11 @@ footer {
         flex: 0 0 70%;
         display: flex;
         flex-direction: column;
-        align-items: stretch;
+        align-items: center;
         justify-content: flex-start;
         padding: 0;
         margin: 0;
-        /* التعديل: لجعلها تأخذ الارتفاع الكامل المتاح داخل main-content */
-        height: 100%; /* تم التعديل */
+        height: auto; /* السماح للارتفاع بأن يتحدد بناءً على المحتوى والـ max-height */
         box-sizing: border-box;
         overflow: hidden;
     }
@@ -551,12 +548,12 @@ footer {
     .image-container {
         width: calc(100% - 5px);
         margin-right: 5px;
-        /* التعديل: لجعلها تأخذ الارتفاع الكامل المتاح داخل image-section */
-        height: 100%; /* تم التعديل من fit-content */
-        max-height: 100%; /* تم التعديل من fit-content */
         aspect-ratio: 16 / 9;
         margin: 0;
         padding: 0;
+        /* التعديل الرئيسي: تحديد أقصى ارتفاع لحاوية الصورة */
+        max-height: calc(100vh - 100px); /* قيمة تقديرية لارتفاع الهيدر والفوتر والهوامش العلوية/السفلية */
+        height: auto; /* السماح للارتفاع بالتكيف مع نسبة الأبعاد والـ max-height */
     }
     .score-section {
         flex: 0 0 30%;
@@ -566,8 +563,7 @@ footer {
         justify-content: flex-start;
         padding: 0;
         margin: 0;
-        /* التعديل: لجعلها تأخذ الارتفاع الكامل المتاح داخل main-content */
-        height: 100%; /* تم التعديل */
+        height: auto; /* السماح للارتفاع بأن يتحدد بناءً على المحتوى والـ max-height */
         box-sizing: border-box;
         overflow: hidden;
     }
@@ -584,12 +580,12 @@ footer {
         box-sizing: border-box;
         border-radius: 10px;
         box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-        /* التعديل: للسماح لها بالنمو لملء المساحة المتاحة وتفعيل التمرير */
-        flex-grow: 1; /* تم التعديل: ستأخذ المساحة المتبقية */
-        overflow-y: auto; /* تم الإبقاء عليه لتفعيل التمرير */
-        min-height: unset; /* تم التعديل: إزالة الارتفاع الأدنى الثابت */
-        max-height: unset; /* تم التعديل: إزالة الارتفاع الأقصى الثابت */
-        height: unset; /* تم التعديل: إزالة الارتفاع الثابت */
+        flex-grow: 1;
+        overflow-y: auto;
+        /* التعديل الرئيسي: تحديد أقصى ارتفاع للوحة التحكم ليتناسب مع الصورة */
+        max-height: calc(100vh - 100px); /* يجب أن تتطابق مع max-height لـ image-container */
+        min-height: unset; /* إزالة الارتفاع الأدنى الثابت */
+        height: unset; /* إزالة الارتفاع الثابت */
         -webkit-overflow-scrolling: touch;
     }
     .bottom-container .timer-container {
