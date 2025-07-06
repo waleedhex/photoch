@@ -19,8 +19,9 @@
         <h1>تحدي الصور</h1>
         <input type="text" id="access-code" placeholder="أدخل رمز الوصول">
         <button id="verify-button">تأكيد</button>
-        <div id="verifying-indicator" style="display: none;">🔄 جار التحقق...</div>
+        <!-- تم نقل حاوية الإعلانات هنا -->
         <div id="announcements-container"></div>
+        <span id="verifying-indicator" style="display: none;">🔄 جار التحقق...</span>
     </div>
 
     <div id="start-container" style="display: none;">
@@ -38,19 +39,20 @@
         <div class="main-content">
             <div class="image-section">
                 <div class="image-container">
-                    <img id="game-image" src="" alt="صورة اللعبة">
-                    <div id="image-owner"></div>
-                    <p id="solution-text"></p>
+                    <div id="solution-text"></div>
+                    <img id="game-image" src="assets/default_category.webp" alt="صورة اللعبة">
                 </div>
-                <button id="hint-button">إظهار الحل</button>
+                <!-- زر "إظهار الحل" لم يعد هنا، تم نقله إلى bottom-container -->
             </div>
             <div class="score-section">
                 <div class="bottom-container">
                     <div class="timer-container">
                         <span id="timer">01:00</span>
-                        <input type="number" id="time-input" value="60" min="10" max="300">
+                        <input type="number" id="time-input" value="60">
                         <button id="start-timer-button">بدء العداد</button>
                     </div>
+                    <!-- تم نقل زر "إظهار الحل" إلى هنا -->
+                    <button id="hint-button">إظهار الحل</button>
                     <div class="score-container">
                         <div class="team">
                             <h2>الفريق الأول</h2>
@@ -72,8 +74,6 @@
         </div>
     </div>
 
-    <footer>
-        © 2025 تحدي الصور - جميع الحقوق محفوظة
-    </footer>
+    <footer>© 2025 تحدي الصور - جميع الحقوق محفوظة</footer>
 </body>
 </html>
