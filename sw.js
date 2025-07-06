@@ -11,7 +11,7 @@ const urlsToCache = [
     '/assets/default_category.webp',
     '/assets/stickers/sticker1.png',
     '/assets/stickers/sticker2.png',
-    '/assets/icon.png',
+    '/assets/icon-192.png',
     '/assets/icon-512.png',
     '/assets/metadata.json',
     '/assets/solutions.json',
@@ -148,6 +148,10 @@ self.addEventListener('fetch', event => {
 
                     if (event.request.url.includes('.json')) {
                         return new Response('{}', { status: 200, statusText: 'OK' });
+                    }
+
+                    if (event.request.url.endsWith('.pdf')) {
+                        return caches.match('/assets/answers.pdf') || new Response('الملف غير متاح في وضع الأوفلاين', { status: 404 });
                     }
 
                     return new Response('', { status: 200, statusText: 'OK' });

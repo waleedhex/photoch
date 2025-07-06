@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>تحدي الصور</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="apple-touch-icon" href="/assets/icon-192.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <script src="script.js" defer></script>
 </head>
 <body>
@@ -15,9 +19,8 @@
         <h1>تحدي الصور</h1>
         <input type="text" id="access-code" placeholder="أدخل رمز الوصول">
         <button id="verify-button">تأكيد</button>
-        <!-- تم نقل حاوية الإعلانات هنا -->
+        <div id="verifying-indicator" style="display: none;">🔄 جار التحقق...</div>
         <div id="announcements-container"></div>
-        <span id="verifying-indicator" style="display: none;">🔄 جار التحقق...</span>
     </div>
 
     <div id="start-container" style="display: none;">
@@ -35,20 +38,19 @@
         <div class="main-content">
             <div class="image-section">
                 <div class="image-container">
-                    <div id="solution-text"></div>
-                    <img id="game-image" src="assets/default_category.webp" alt="صورة اللعبة">
+                    <img id="game-image" src="" alt="صورة اللعبة">
+                    <div id="image-owner"></div>
+                    <p id="solution-text"></p>
                 </div>
-                <!-- زر "إظهار الحل" لم يعد هنا، تم نقله إلى bottom-container -->
+                <button id="hint-button">إظهار الحل</button>
             </div>
             <div class="score-section">
                 <div class="bottom-container">
                     <div class="timer-container">
                         <span id="timer">01:00</span>
-                        <input type="number" id="time-input" value="60">
+                        <input type="number" id="time-input" value="60" min="10" max="300">
                         <button id="start-timer-button">بدء العداد</button>
                     </div>
-                    <!-- تم نقل زر "إظهار الحل" إلى هنا -->
-                    <button id="hint-button">إظهار الحل</button>
                     <div class="score-container">
                         <div class="team">
                             <h2>الفريق الأول</h2>
@@ -70,6 +72,8 @@
         </div>
     </div>
 
-    <footer>© 2025 تحدي الصور - جميع الحقوق محفوظة</footer>
+    <footer>
+        © 2025 تحدي الصور - جميع الحقوق محفوظة
+    </footer>
 </body>
 </html>
