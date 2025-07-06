@@ -147,31 +147,54 @@ body {
     background: #5F9EA0; /* Cadet Blue */
 }
 
-/* زر "حفظ كتطبيق" (Install button): تصميم جديد */
+/* زر "أخذ نسخة محلية": تصميم يتماشى مع الثيم */
 .install-prompt {
-    padding: 12px 25px; /* زيادة الحجم قليلاً */
-    font-size: 1rem; /* زيادة حجم الخط */
-    background: linear-gradient(45deg, #6A5ACD, #483D8B); /* تدرج لوني (Slate Blue to Dark Slate Blue) */
+    padding: 12px 25px;
+    font-size: 1rem;
+    background: #4682B4; /* Steel Blue - نفس لون زر البداية */
     color: white;
     border: none;
-    border-radius: 12px; /* زوايا أكثر استدارة */
+    border-radius: 8px; /* زوايا مستديرة مثل بقية الأزرار */
     cursor: pointer;
-    margin-top: 15px; /* مسافة لتقريبه من زر البداية */
-    margin-bottom: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* ظل أكثر بروزاً */
-    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+    margin-top: 15px;
+    margin-bottom: 10px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3); /* ظل مشابه للأزرار الأخرى */
+    transition: transform 0.3s ease, background 0.3s ease;
     z-index: 120;
     pointer-events: auto;
     width: auto;
-    max-width: 200px; /* زيادة أقصى عرض */
-    font-weight: bold; /* خط سميك */
-    text-transform: uppercase; /* حروف كبيرة */
+    max-width: 200px;
+    font-weight: bold;
 }
 
 .install-prompt:hover {
-    transform: translateY(-2px); /* رفع بسيط عند التحويم */
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4); /* ظل أقوى عند التحويم */
-    background: linear-gradient(45deg, #483D8B, #6A5ACD); /* عكس التدرج أو تدرج مختلف قليلاً */
+    transform: scale(1.05);
+    background: #5F9EA0; /* Cadet Blue - نفس تأثير الـ hover للأزرار الأخرى */
+}
+
+/* زر "الإجابات": تصميم مشابه لزر أخذ نسخة محلية */
+.answers-button {
+    padding: 12px 25px;
+    font-size: 1rem;
+    background: #4682B4; /* Steel Blue */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, background 0.3s ease;
+    z-index: 120;
+    pointer-events: auto;
+    width: auto;
+    max-width: 200px;
+    font-weight: bold;
+}
+
+.answers-button:hover {
+    transform: scale(1.05);
+    background: #5F9EA0; /* Cadet Blue */
 }
 
 #categories-grid {
@@ -836,5 +859,10 @@ footer {
     #start-timer-button {
         padding: 5px 10px;
         font-size: 0.7rem;
+    }
+    /* نص الحل في الشاشات الصغيرة */
+    #solution-text {
+        font-size: 1.5rem;
+        padding: 10px;
     }
 }

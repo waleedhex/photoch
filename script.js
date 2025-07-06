@@ -43,7 +43,8 @@ async function verifyAccessCode() {
     const verifyingIndicator = document.getElementById('verifying-indicator');
 
     if (!code) {
-        alert('الرجاء إدخال رمز الوصول!');
+        // استخدام رسالة مخصصة بدلاً من alert()
+        displayMessage('الرجاء إدخال رمز الوصول!', 'error');
         return;
     }
 
@@ -75,17 +76,31 @@ async function verifyAccessCode() {
             document.getElementById('access-code-container').style.display = 'none';
             document.getElementById('start-container').style.display = 'flex';
         } else {
-            alert('رمز غير صالح! حاول مرة أخرى.');
+            // استخدام رسالة مخصصة بدلاً من alert()
+            displayMessage('رمز غير صالح! حاول مرة أخرى.', 'error');
         }
     } catch (error) {
         console.error('خطأ في تحميل codes.json:', error);
-        alert('حدث خطأ أثناء التحقق من الرمز. تأكد من وجود الملف.');
+        // استخدام رسالة مخصصة بدلاً من alert()
+        displayMessage('حدث خطأ أثناء التحقق من الرمز. تأكد من وجود الملف.', 'error');
     } finally {
         isVerifying = false;
         verifyButton.disabled = false;
         verifyButton.textContent = 'تأكيد';
         verifyingIndicator.style.display = 'none';
     }
+}
+
+// دالة لعرض رسائل مخصصة بدلاً من alert()
+function displayMessage(message, type = 'info') {
+    const messageBox = document.createElement('div');
+    messageBox.className = `message-box ${type}`;
+    messageBox.textContent = message;
+    document.body.appendChild(messageBox);
+
+    setTimeout(() => {
+        messageBox.remove();
+    }, 3000); // إخفاء الرسالة بعد 3 ثوانٍ
 }
 
 async function loadAnnouncements() {
@@ -180,7 +195,8 @@ function startTimer() {
         updateTimerDisplay();
         if (timeLeft <= 0) {
             clearInterval(timer);
-            alert('انتهى الوقت! انتقل إلى الجولة التالية.');
+            // استخدام رسالة مخصصة بدلاً من alert()
+            displayMessage('انتهى الوقت! انتقل إلى الجولة التالية.', 'info');
             nextRound();
         }
     }, 1000);
@@ -215,7 +231,8 @@ async function nextRound() {
     solutionText.style.display = 'none';
     const nextIndex = getRandomImageIndex();
     if (!nextIndex) {
-        alert('لا توجد صور للعرض! العودة إلى شاشة البداية.');
+        // استخدام رسالة مخصصة بدلاً من alert()
+        displayMessage('لا توجد صور للعرض! العودة إلى شاشة البداية.', 'info');
         returnToStart();
         return;
     }
@@ -249,7 +266,8 @@ async function startGame() {
         console.log('تم تحميل metadata.json وsolutions.json بنجاح:', imageList);
     } catch (error) {
         console.error('خطأ في تحميل metadata.json أو solutions.json:', error);
-        alert('فشل تحميل بيانات الصور.');
+        // استخدام رسالة مخصصة بدلاً من alert()
+        displayMessage('فشل تحميل بيانات الصور.', 'error');
         return;
     }
 
@@ -263,7 +281,8 @@ async function startGame() {
     document.getElementById('game-container').style.display = 'flex';
     const firstIndex = getRandomImageIndex();
     if (!firstIndex) {
-        alert('لا توجد صور للعرض! العودة إلى شاشة البداية.');
+        // استخدام رسالة مخصصة بدلاً من alert()
+        displayMessage('لا توجد صور للعرض! العودة إلى شاشة البداية.', 'info');
         returnToStart();
         return;
     }
@@ -317,7 +336,8 @@ function showInstallPrompt() {
                 deferredPrompt = null;
             });
         } else {
-            alert('لتشغيل اللعبة أوفلاين، انقر على "إضافة إلى الشاشة الرئيسية" من قائمة المتصفح.');
+            // استخدام رسالة مخصصة بدلاً من alert()
+            displayMessage('لتشغيل اللعبة أوفلاين، انقر على "إضافة إلى الشاشة الرئيسية" من قائمة المتصفح.', 'info');
         }
     });
 }
@@ -364,6 +384,18 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log('تم ربط زر إظهار الحل بنجاح');
     } else {
         console.error('لم يتم العثور على زر إظهار الحل!');
+    }
+
+    // إضافة معالج حدث لزر "الإجابات"
+    const answersButton = document.getElementById('answers-button');
+    if (answersButton) {
+        answersButton.addEventListener('click', () => {
+            window.open('assets/answers.pdf', '_blank');
+            console.log('تم النقر على زر الإجابات');
+        });
+        console.log('تم ربط زر الإجابات بنجاح');
+    } else {
+        console.error('لم يتم العثور على زر الإجابات!');
     }
 });
 
