@@ -1,4 +1,4 @@
-const CACHE_NAME = 'tahadi-alsuwar-offline-v2';
+const CACHE_NAME = 'tahadi-alsuwar-offline-v3';
 const urlsToCache = [
     '/',
     '/index.html',
@@ -124,7 +124,8 @@ self.addEventListener('fetch', event => {
             .then(response => {
                 if (response) {
                     console.log('Serving from cache:', event.request.url);
-                    return response;
+                    // تم تصحيح الخطأ هنا: استنساخ كائن Response قبل إعادته
+                    return response.clone();
                 }
 
                 console.log('Fetching from network:', event.request.url);

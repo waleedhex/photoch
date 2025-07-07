@@ -241,7 +241,8 @@ async function startGame() {
         const metadataResponse = await fetch('assets/metadata.json');
         const metadata = await metadataResponse.json();
         const solutionsResponse = await fetch('assets/solutions.json');
-        const solutions = await solutions.json();
+        // تم تصحيح الخطأ هنا: استخدام solutionsResponse.json() بدلاً من solutions.json()
+        const solutions = await solutionsResponse.json();
 
         imageList = metadata.images.map(img => {
             const solution = solutions.solutions.find(s => s.image === img.name);
