@@ -1,4 +1,4 @@
-const CACHE_NAME = 'tahadi-alsuwar-offline-v1';
+const CACHE_NAME = 'tahadi-alsuwar-offline-v2';
 const urlsToCache = [
     '/',
     '/index.html',
