@@ -57,11 +57,15 @@ async function verifyAccessCode() {
             console.log('أوفلاين أو في وضع PWA، تخطي التحقق...');
             document.getElementById('access-code-container').style.display = 'none';
             document.getElementById('start-container').style.display = 'flex';
+            localStorage.setItem('accessCode', code); // إضافة حفظ الرمز
+            console.log('تم حفظ رمز الدخول في localStorage:', code);
             return;
         }
 
         if (code.toLowerCase() === ADMIN_CODE.toLowerCase()) {
             console.log('رمز الأدمن مُدخل، جارٍ التوجيه إلى admin.html...');
+            localStorage.setItem('accessCode', code); // إضافة حفظ رمز الأدمن
+            console.log('تم حفظ رمز الأدمن في localStorage:', code);
             window.location.href = './admin.html';
             return;
         }
@@ -74,6 +78,8 @@ async function verifyAccessCode() {
             console.log('الرمز صالح، جارٍ عرض شاشة البداية...');
             document.getElementById('access-code-container').style.display = 'none';
             document.getElementById('start-container').style.display = 'flex';
+            localStorage.setItem('accessCode', code); // إضافة حفظ الرمز الصالح
+            console.log('تم حفظ رمز الدخول الصالح في localStorage:', code);
         } else {
             alert('رمز غير صالح! حاول مرة أخرى.');
         }
@@ -105,7 +111,6 @@ async function loadAnnouncements() {
             if (announcement.title) {
                 const title = document.createElement('h3');
                 title.textContent = announcement.title;
-                announcementCard.appendChild(title);
             }
             if (announcement.text) {
                 const text = document.createElement('p');
@@ -236,7 +241,7 @@ async function startGame() {
         const metadataResponse = await fetch('assets/metadata.json');
         const metadata = await metadataResponse.json();
         const solutionsResponse = await fetch('assets/solutions.json');
-        const solutions = await solutionsResponse.json();
+        const solutions = await solutions.json();
 
         imageList = metadata.images.map(img => {
             const solution = solutions.solutions.find(s => s.image === img.name);
@@ -388,6 +393,18 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log('تم ربط زر الإجابات بنجاح');
     } else {
         console.error('لم يتم العثور على زر الإجابات!');
+    }
+
+    // أوتوفيل لرمز الدخول في وضع PWA
+    const accessCodeInput = document.getElementById('access-code');
+    if (isOfflineOrPWA() && accessCodeInput) {
+        const savedAccessCode = localStorage.getItem('accessCode');
+        if (savedAccessCode) {
+            accessCodeInput.value = savedAccessCode;
+            console.log('تم تعبئة رمز الدخول من localStorage في وضع PWA:', savedAccessCode);
+        } else {
+            console.log('لم يتم العثور على رمز دخول محفوظ في localStorage');
+        }
     }
 });
 
